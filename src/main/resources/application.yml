@@ -52,8 +52,6 @@ logging:
       rollingpolicy :
         max-file-size : 10MB
         clean-history-on-start : false
-        total-size-cap : 50MB
-
 
 
 
