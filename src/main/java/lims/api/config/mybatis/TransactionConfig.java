@@ -1,4 +1,4 @@
-package lims.api.config;
+package lims.api.config.mybatis;
 
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
