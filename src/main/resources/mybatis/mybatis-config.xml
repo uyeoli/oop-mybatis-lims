@@ -7,6 +7,10 @@
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
 
+    <typeHandlers>
+        <typeHandler handler="lims.api.config.mybatis.typehandler.EnumeratedValueTypeHandler"/>
+    </typeHandlers>
+
 </configuration>
 
 

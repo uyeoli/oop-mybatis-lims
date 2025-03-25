@@ -1,5 +1,20 @@
 server :
   port : 8080
+  servlet:
+    encoding :
+      charset: UTF-8
+      enabled: true
+      force : true
+  shutdown: graceful
+  tomcat:
+    connection-timeout: 90s
+    max-connections: 50
+  error :
+    include-message: always
+    include-stacktrace: never
+    include-binding-errors: always
+    whitelabel:
+      enabled: false
 
 spring:
   datasource:
@@ -7,6 +22,11 @@ spring:
     url: jdbc:log4jdbc:mysql://localhost:3306/lims?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: 1234
+  hikari:
+    maximum-pool-size: 10
+    connection-timeout: 60000
+    max-lifetime: 25200000
+
 
 mybatis :
   mapper-locations: classpath:/mappers/**/*.xml
@@ -18,8 +38,8 @@ logging:
     com.zaxxer.hikari.HikariConfig: debug
     com.zaxxer.hikari: trace
     root: info
-    lims.api: info
-    jdbc.resultsettable: debug
+    lims.api: debug
+    jdbc.resultsettable: info
     jdbc.sqltiming: debug
     jdbc: off
     jdbc.audit: off
@@ -28,6 +48,12 @@ logging:
     jdbc.connection: info
   file :
     path : C:\dev\mybatis-log
+    logback :
+      rollingpolicy :
+        max-file-size : 10MB
+        clean-history-on-start : false
+        total-size-cap : 50MB
+
 
 
 
