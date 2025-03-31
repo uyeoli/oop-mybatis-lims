@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lims.api.test.repository.ReceiptRepository">
+
+    <select id="findAll" resultType="Receipt">
+        SELECT
+            id,
+            requestId,
+            receiptName,
+            receiptNumber
+        FROM receipt
+    </select>
+
+
+    <insert id="save" parameterType="Receipt" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO receipt(
+            requestId,
+            receiptName,
+            receiptNumber
+        )VALUES(
+            #{requestId},
+            #{receiptName},
+            #{receiptNumber}
+        )
+    </insert>
+
+    <insert id="update" parameterType="Request">
+        UPDATE receipt SET
+            requestId = #{requestId},
+            receiptName = #{receiptName},
+            receiptNumber = #{receiptNumber}
+        WHERE id = #{id}
+    </insert>
+
+    <delete id="deleteById" parameterType="Long">
+        DELETE FROM receipt WHERE id = #{id}
+    </delete>
+
+
+</mapper>

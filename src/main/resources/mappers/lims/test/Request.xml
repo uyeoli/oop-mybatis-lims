@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lims.api.test.repository.RequestRepository">
+
+    <select id="findAll" resultType="Request">
+        SELECT
+            id,
+            test_title,
+            sample_name,
+            sample_quantity
+        FROM REQUEST
+    </select>
+
+
+    <insert id="save" parameterType="Request" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO REQUEST(
+            test_title,
+            sample_name,
+            sample_quantity
+        )VALUES(
+            #{testTitle},
+            #{sampleName},
+            #{sampleQuantity}
+        )
+    </insert>
+
+    <insert id="update" parameterType="Request">
+        UPDATE REQUEST SET
+            test_title = #{testTitle},
+            sample_name = #{sampleName},
+            sample_quantity = #{sampleQuantity}
+        WHERE id = #{id}
+    </insert>
+
+    <delete id="deleteById" parameterType="Long">
+        DELETE FROM request WHERE id = #{id}
+    </delete>
+
+
+</mapper>
