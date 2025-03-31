@@ -15,11 +15,8 @@ public class Receipt {
     private String receiptNumber;
     private List<TestItem> testItems;
 
-    public static ReceiptDto of(Receipt receipt) {
-        ReceiptDto receiptDto = new ReceiptDto();
-        receiptDto.setId(receipt.getId());
-        receiptDto.setReceiptNumber(receipt.getReceiptNumber());
-        receiptDto.setReceiptName(receipt.getReceiptName());
-        return receiptDto;
+    public boolean isNew() {
+        return this.id == null || this.id == 0;
     }
+
 }
