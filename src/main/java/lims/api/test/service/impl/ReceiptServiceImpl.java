@@ -25,7 +25,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     public List<ReceiptDto> findAll() {
         List<ReceiptDto> receiptList = receiptRepository.findAll().stream().map(Receipt::of).collect(Collectors.toList());
         receiptList.forEach(receipt -> {
-            receipt.setTestItem(testItemRepository.findItems(receipt.getId()));
+            receipt.setTestItems(testItemRepository.findItems(receipt.getId()));
         });
         return receiptList;
     }
@@ -33,7 +33,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Override
     public void receipt(ReceiptInfoDto receiptInfoDto) {
         Receipt receipt = receiptInfoDto.toEntity(receiptInfoDto);
-        if(isNew(receiptInfoDto.getId())) {
+        if(isNew(receipt.getId())) {
             save(receipt);
         } else {
             update(receipt);

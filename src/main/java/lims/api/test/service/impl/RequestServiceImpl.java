@@ -27,7 +27,7 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public void request(RequestInfoDto requestInfoDto) {
         Request request = requestInfoDto.toEntity(requestInfoDto);
-        if(isNew(requestInfoDto.getId())) {
+        if(isNew(request.getId())) {
             requestRepository.save(request);
         } else {
             requestRepository.update(request);

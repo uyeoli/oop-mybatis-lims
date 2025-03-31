@@ -9,7 +9,6 @@ public interface RequestService {
 
     void request(RequestInfoDto testRequestDto);
     List<RequestDto> findAll();
-
     void delete(Long id);
 
 }

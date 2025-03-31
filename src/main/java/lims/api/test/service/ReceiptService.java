@@ -11,6 +11,5 @@ public interface ReceiptService {
 
     void receipt(ReceiptInfoDto receiptInfoDto);
 
-
     void delete(Long id);
 }
