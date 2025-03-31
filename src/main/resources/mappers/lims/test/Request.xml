@@ -12,7 +12,7 @@
     </select>
 
 
-    <insert id="save" parameterType="Request" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="Request" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO REQUEST(
             test_title,
             sample_name,

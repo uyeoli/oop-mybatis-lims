@@ -12,7 +12,7 @@
     </select>
 
 
-    <insert id="save" parameterType="Receipt" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="Receipt" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO receipt(
             requestId,
             receiptName,

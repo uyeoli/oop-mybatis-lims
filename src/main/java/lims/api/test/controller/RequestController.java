@@ -1,7 +1,6 @@
 package lims.api.test.controller;
 
 
-import lims.api.test.dto.TestStartFileDto;
 import lims.api.test.dto.request.RequestInfoDto;
 import lims.api.test.dto.response.RequestDto;
 import lims.api.test.service.RequestService;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/test/request")
+@RequestMapping("/test/requests")
 @RequiredArgsConstructor
 public class RequestController {
 

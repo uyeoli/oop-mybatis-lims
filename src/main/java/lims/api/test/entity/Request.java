@@ -12,12 +12,9 @@ public class Request {
     private String sampleName;
     private Integer sampleQuantity;
 
-    public static RequestDto of(Request request) {
-        return RequestDto.builder()
-                .testTitle(request.getTestTitle())
-                .sampleName(request.getSampleName())
-                .sampleQuantity(request.getSampleQuantity())
-                .build();
+    public boolean isNew() {
+        return this.id == null || this.id == 0;
     }
+
 
 }

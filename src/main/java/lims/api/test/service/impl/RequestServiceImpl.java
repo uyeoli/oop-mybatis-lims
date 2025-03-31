@@ -9,9 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static lims.api.common.util.ValidationUtil.isNew;
 
 @Service
 @RequiredArgsConstructor
@@ -20,15 +17,15 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     public List<RequestDto> findAll() {
-        return requestRepository.findAll().stream().map(Request::of).collect(Collectors.toList());
+        return requestRepository.findAll().stream().map(RequestDto::of).toList();
     }
 
 
     @Override
     public void request(RequestInfoDto requestInfoDto) {
         Request request = requestInfoDto.toEntity(requestInfoDto);
-        if(isNew(request.getId())) {
-            requestRepository.save(request);
+        if(request.isNew()) {
+            requestRepository.insert(request);
         } else {
             requestRepository.update(request);
         }
