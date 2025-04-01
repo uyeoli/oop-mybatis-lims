@@ -1,9 +1,9 @@
 package lims.api.test.entity;
 
-import lims.api.test.dto.response.ReceiptDto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -13,7 +13,7 @@ public class Receipt {
     private Integer requestId;
     private String receiptName;
     private String receiptNumber;
-    private List<TestItem> testItems;
+    private List<TestItem> testItems = new ArrayList<>();
 
     public boolean isNew() {
         return this.id == null || this.id == 0;

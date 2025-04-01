@@ -21,7 +21,7 @@ public class ReceiptController {
     }
 
     @PostMapping
-    public void receipt(ReceiptInfoDto receiptInfoDto) {
+    public void receipt(@RequestBody ReceiptInfoDto receiptInfoDto) {
         receiptService.receipt(receiptInfoDto);
     }
 
