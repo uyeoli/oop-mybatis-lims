@@ -1,6 +1,6 @@
 package lims.api.test.service.impl;
 
-import lims.api.test.dto.request.ReceiptApproveInfo;
+import lims.api.test.dto.request.ReceiptApproverInfoDto;
 import lims.api.test.dto.request.ReceiptInfoDto;
 import lims.api.test.dto.response.ReceiptDto;
 import lims.api.test.entity.Receipt;
@@ -64,7 +64,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
     @Override
-    public void approveRequest(Long id, ReceiptApproveInfo receiptApproveInfo) {
+    public void approveRequest(Long id, List<ReceiptApproverInfoDto> approvers) {
 
     }
 }
