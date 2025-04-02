@@ -1,5 +1,6 @@
 package lims.api.test.service.impl;
 
+import lims.api.test.dto.request.ReceiptApproveInfo;
 import lims.api.test.dto.request.ReceiptInfoDto;
 import lims.api.test.dto.response.ReceiptDto;
 import lims.api.test.entity.Receipt;
@@ -17,6 +18,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     private final ReceiptRepository receiptRepository;
     private final TestItemRepository testItemRepository;
 
+
     @Override
     public List<ReceiptDto> findAll() {
         List<ReceiptDto> receiptList = receiptRepository.findAll().stream().map(ReceiptDto::of).toList();
@@ -27,7 +29,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
     @Override
-    public void receipt(ReceiptInfoDto receiptInfoDto) {
+    public void save(ReceiptInfoDto receiptInfoDto) {
         Receipt receipt = receiptInfoDto.toEntity(receiptInfoDto);
         if(receipt.isNew()) {
             create(receipt);
@@ -61,6 +63,8 @@ public class ReceiptServiceImpl implements ReceiptService {
         receiptRepository.deleteById(id);
     }
 
+    @Override
+    public void approveRequest(Long id, ReceiptApproveInfo receiptApproveInfo) {
 
-
+    }
 }

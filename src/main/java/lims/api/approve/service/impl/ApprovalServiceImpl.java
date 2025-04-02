@@ -1,8 +1,8 @@
 package lims.api.approve.service.impl;
 
 import lims.api.approve.dto.request.ApproveInfoDto;
+import lims.api.approve.dto.request.RejectInfoDto;
 import lims.api.approve.dto.response.ApproveDto;
-import lims.api.test.dto.response.ReceiptApproveDto;
 import lims.api.approve.service.ApprovalService;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +20,10 @@ public class ApprovalServiceImpl implements ApprovalService {
     public void approve(ApproveInfoDto approveInfoDto) {
 
     }
+
+    @Override
+    public void reject(RejectInfoDto rejectInfoDto) {
+
+    }
+
 }

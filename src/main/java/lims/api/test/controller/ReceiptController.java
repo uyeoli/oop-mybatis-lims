@@ -1,6 +1,7 @@
 package lims.api.test.controller;
 
 
+import lims.api.test.dto.request.ReceiptApproveInfo;
 import lims.api.test.dto.request.ReceiptInfoDto;
 import lims.api.test.dto.response.ReceiptDto;
 import lims.api.test.service.ReceiptService;
@@ -21,13 +22,18 @@ public class ReceiptController {
     }
 
     @PostMapping
-    public void receipt(@RequestBody ReceiptInfoDto receiptInfoDto) {
-        receiptService.receipt(receiptInfoDto);
+    public void save(@RequestBody ReceiptInfoDto receiptInfoDto) {
+        receiptService.save(receiptInfoDto);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         receiptService.delete(id);
+    }
+
+    @PostMapping("/{id}/approval")
+    public void approveRequest(@PathVariable Long id, @RequestBody ReceiptApproveInfo receiptApproveInfo) {
+        receiptService.approveRequest(id, receiptApproveInfo);
     }
 
 

@@ -19,6 +19,7 @@ public class ReceiptInfoDto {
 
     public Receipt toEntity(ReceiptInfoDto receiptInfoDto) {
         Receipt receipt = new Receipt();
+        receipt.setId(receiptInfoDto.getId());
         receipt.setReceiptName(receiptInfoDto.getReceiptName());
         receipt.setReceiptNumber(receiptInfoDto.getReceiptNumber());
         receipt.setTestItems(receiptInfoDto.getTestItems());

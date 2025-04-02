@@ -1,5 +1,6 @@
 package lims.api.test.service;
 
+import lims.api.test.dto.request.ReceiptApproveInfo;
 import lims.api.test.dto.request.ReceiptInfoDto;
 import lims.api.test.dto.response.ReceiptDto;
 
@@ -9,7 +10,9 @@ public interface ReceiptService {
 
     List<ReceiptDto> findAll();
 
-    void receipt(ReceiptInfoDto receiptInfoDto);
+    void save(ReceiptInfoDto receiptInfoDto);
 
     void delete(Long id);
+
+    void approveRequest(Long id, ReceiptApproveInfo receiptApproveInfo);
 }
