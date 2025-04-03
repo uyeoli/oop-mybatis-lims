@@ -41,7 +41,7 @@
     </delete>
 
     <update id="updateApproveKey" parameterType="Receipt">
-        update receipt set approve_id = {#approveId}
+        update receipt set approve_id = {#approveId} where id = #{id}
     </update>
 
 
