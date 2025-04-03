@@ -1,5 +1,8 @@
 package lims.api.test.service.impl;
 
+import lims.api.approve.entity.Approval;
+import lims.api.approve.enums.ApprovalRequestDomain;
+import lims.api.approve.service.ApprovalService;
 import lims.api.test.dto.request.ReceiptApproverInfoDto;
 import lims.api.test.dto.request.ReceiptInfoDto;
 import lims.api.test.dto.response.ReceiptDto;
@@ -17,7 +20,7 @@ import java.util.List;
 public class ReceiptServiceImpl implements ReceiptService {
     private final ReceiptRepository receiptRepository;
     private final TestItemRepository testItemRepository;
-
+    private final ApprovalService approvalService;
 
     @Override
     public List<ReceiptDto> findAll() {
@@ -65,6 +68,9 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public void approveRequest(Long id, List<ReceiptApproverInfoDto> approvers) {
-
+        Approval approval = approvalService.approveRequest(ApprovalRequestDomain.RECEIPT, approvers);
+        Receipt receipt = receiptRepository.findById(id);
+        receipt.setApproveId(approval.getId());
+        receiptRepository.updateApproveKey(receipt);
     }
 }

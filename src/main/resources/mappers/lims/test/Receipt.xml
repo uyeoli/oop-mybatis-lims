@@ -11,6 +11,10 @@
         FROM receipt
     </select>
 
+    <select id="findById" parameterType="Long">
+        select * from receipt where id = #{id}
+    </select>
+
 
     <insert id="insert" parameterType="Receipt" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO receipt(
@@ -35,6 +39,10 @@
     <delete id="deleteById" parameterType="Long">
         DELETE FROM receipt WHERE id = #{id}
     </delete>
+
+    <update id="updateApproveKey" parameterType="Receipt">
+        update receipt set approve_id = {#approveId}
+    </update>
 
 
 </mapper>

@@ -3,6 +3,8 @@ package lims.api.approve.service;
 import lims.api.approve.dto.request.ApproveInfoDto;
 import lims.api.approve.dto.request.RejectInfoDto;
 import lims.api.approve.dto.response.ApproveDto;
+import lims.api.approve.entity.Approval;
+import lims.api.approve.enums.ApprovalRequestDomain;
 import lims.api.test.dto.request.ReceiptApproverInfoDto;
 
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.List;
 public interface ApprovalService {
 
     List<ApproveDto> findAll();
+
+    Approval approveRequest(ApprovalRequestDomain approvalRequestDomain, List<ReceiptApproverInfoDto> approvers);
 
     void approve(ApproveInfoDto approveInfoDto);
 
