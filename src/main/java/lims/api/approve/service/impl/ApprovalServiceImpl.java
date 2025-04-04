@@ -4,6 +4,7 @@ import lims.api.approve.dto.request.ApproveInfoDto;
 import lims.api.approve.dto.request.RejectInfoDto;
 import lims.api.approve.dto.response.ApproveDto;
 import lims.api.approve.entity.Approval;
+import lims.api.approve.entity.Approver;
 import lims.api.approve.enums.ApprovalRequestDomain;
 import lims.api.approve.repository.ApprovalRepository;
 import lims.api.approve.service.ApprovalService;
@@ -23,7 +24,7 @@ public class ApprovalServiceImpl implements ApprovalService {
     }
 
     @Override
-    public Approval approveRequest(ApprovalRequestDomain approvalRequestDomain, List<ReceiptApproverInfoDto> approvers) {
+    public Approval approveRequest(ApprovalRequestDomain approvalRequestDomain, List<Approver> approvers) {
         Approval approval = new Approval(approvalRequestDomain);
         createApprove(approval);
         saveApprovers(approval.getId(), approvers);
@@ -35,8 +36,11 @@ public class ApprovalServiceImpl implements ApprovalService {
         approvalRepository.insertApproval(approval);
     }
 
-    private void saveApprovers(Long approveId, List<ReceiptApproverInfoDto> approvers) {
-
+    private void saveApprovers(Long approveId, List<Approver> approvers) {
+        approvers.forEach(approver -> {
+            approver.setApproveId(approveId);
+            approvalRepository.insertApprover(approver);
+        });
     }
 
     @Override

@@ -4,6 +4,7 @@ import lims.api.approve.dto.request.ApproveInfoDto;
 import lims.api.approve.dto.request.RejectInfoDto;
 import lims.api.approve.dto.response.ApproveDto;
 import lims.api.approve.entity.Approval;
+import lims.api.approve.entity.Approver;
 import lims.api.approve.enums.ApprovalRequestDomain;
 import lims.api.test.dto.request.ReceiptApproverInfoDto;
 
@@ -13,7 +14,7 @@ public interface ApprovalService {
 
     List<ApproveDto> findAll();
 
-    Approval approveRequest(ApprovalRequestDomain approvalRequestDomain, List<ReceiptApproverInfoDto> approvers);
+    Approval approveRequest(ApprovalRequestDomain approvalRequestDomain, List<Approver> approvers);
 
     void approve(ApproveInfoDto approveInfoDto);
 

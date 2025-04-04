@@ -8,9 +8,8 @@ import lombok.Setter;
 @Setter
 public class Approval{
     private Long id;
-    private ApprovalRequestDomain approvalRequestDomain;
-
-    public Approval(ApprovalRequestDomain approvalRequestDomain) {
-        this.approvalRequestDomain = approvalRequestDomain;
+    private ApprovalRequestDomain requestDomain;
+    public Approval(ApprovalRequestDomain requestDomain) {
+        this.requestDomain = requestDomain;
     }
 }

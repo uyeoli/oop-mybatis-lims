@@ -1,8 +1,15 @@
 package lims.api.approve.enums;
 
-public enum ApprovalStatus {
+import lims.api.config.mybatis.typehandler.EnumeratedValueType;
 
-    DRAFT, //기안
-    APPROVE, //승인
-    REJECT //반려
+public enum ApprovalStatus  implements EnumeratedValueType {
+
+    Y,
+    N;
+
+
+    @Override
+    public String value() {
+        return this.name();
+    }
 }
