@@ -1,8 +1,8 @@
-package lims.api.approve.enums;
+package lims.api.common.enums;
 
 import lims.api.config.mybatis.typehandler.EnumeratedValueType;
 
-public enum ApprovalStatus  implements EnumeratedValueType {
+public enum UseType implements EnumeratedValueType {
 
     Y,
     N;

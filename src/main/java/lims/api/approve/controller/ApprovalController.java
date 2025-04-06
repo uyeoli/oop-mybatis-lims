@@ -15,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ApprovalController {
     private final ApprovalService approvalService;
+
     @PostMapping
     public void approve(@RequestBody ApproveInfoDto approveInfoDto) {
         approvalService.approve(approveInfoDto);

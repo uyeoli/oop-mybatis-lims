@@ -9,4 +9,7 @@ public interface ApprovalRepository {
     void insertApproval(Approval approval);
 
     void insertApprover(Approver approver);
+
+    void approve(Approver approver);
+    void reject(Approver approver);
 }

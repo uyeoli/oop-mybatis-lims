@@ -13,7 +13,9 @@ import lims.api.test.repository.TestItemRepository;
 import lims.api.test.service.ReceiptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +24,9 @@ public class ReceiptServiceImpl implements ReceiptService {
     private final ReceiptRepository receiptRepository;
     private final TestItemRepository testItemRepository;
     private final ApprovalService approvalService;
+
+    //승인 요청 - 접수, 결과입력
+    //승인, 반려 - 승인서비스
 
     @Override
     public List<ReceiptDto> findAll() {
@@ -70,10 +75,15 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Override
     public void approveRequest(Long id, List<ReceiptApproverInfoDto> receiptApprovers) {
         List<Approver> approvers = receiptApprovers.stream().map(ReceiptApproverInfoDto::of).toList();
+        //TODO - ApprovalRequestDomain은 클라이언트에서 받아야할지 각각의 서비스에서 세팅해야할지
         Approval approval = approvalService.approveRequest(ApprovalRequestDomain.RECEIPT, approvers);
 
         Receipt receipt = receiptRepository.findById(id);
         receipt.setApproveId(approval.getId());
         receiptRepository.updateApproveKey(receipt);
     }
+
+    //시험을 의뢰한다.
+    // 접수한다.
+    // 접수 승인요청을 보낸다.
 }

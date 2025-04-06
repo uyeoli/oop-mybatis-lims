@@ -1,6 +1,6 @@
 package lims.api.approve.entity;
 
-import lims.api.approve.enums.ApprovalStatus;
+import lims.api.common.enums.UseType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,5 +13,5 @@ public class Approver {
     private String approverName;
     private Integer approveOrder;
     private Long approveId;
-    private ApprovalStatus approveYn;
+    private UseType approveYn;
 }
