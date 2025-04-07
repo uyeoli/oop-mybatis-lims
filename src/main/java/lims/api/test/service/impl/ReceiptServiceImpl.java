@@ -8,14 +8,13 @@ import lims.api.test.dto.request.ReceiptApproverInfoDto;
 import lims.api.test.dto.request.ReceiptInfoDto;
 import lims.api.test.dto.response.ReceiptDto;
 import lims.api.test.entity.Receipt;
+import lims.api.test.entity.TestItem;
 import lims.api.test.repository.ReceiptRepository;
 import lims.api.test.repository.TestItemRepository;
 import lims.api.test.service.ReceiptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,30 +38,31 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public void save(ReceiptInfoDto receiptInfoDto) {
-        Receipt receipt = receiptInfoDto.toEntity(receiptInfoDto);
+        Receipt receipt = receiptInfoDto.toReceiptEntity(receiptInfoDto);
+        //TODO - 저장할때와 수정할때 같은 DTO를 씀. 이럴경우 분리를 해야할까? ->
+        // 만약 생성DTO와 수정DTO를 둘 다 가지고있는 저장 DTO로 받는다면 저장일때는 생성DTO에, 수정일때는 수정 DTO에 세팅해야한다.
+        // 이게 좋은 방법일까? 클라이언트도 그걸 구분해서 보내줘야하지 않나?
+        List<TestItem> testItems = receiptInfoDto.getTestItems().stream().map(item -> item.toTestItemEntity(item)).toList();
         if(receipt.isNew()) {
-            create(receipt);
+            receiptRepository.insert(receipt);
+            insertTestItems(testItems, receipt.getId());
         } else {
-            update(receipt);
+            receiptRepository.update(receipt);
+            updateTestItems(testItems);
         }
     }
 
-    private void create(Receipt receipt) {
-        receiptRepository.insert(receipt);
-        Long receiptId = receipt.getId();
-
-        receipt.getTestItems().forEach(item -> {
+    private void insertTestItems(List<TestItem> testItems, Long receiptId) {
+        testItems.forEach(item -> {
             item.setReceiptId(receiptId);
             testItemRepository.insert(item);
         });
+
     }
 
-    private void update(Receipt receipt) {
-        receiptRepository.update(receipt);
-
-        receipt.getTestItems().forEach(item -> {
-            testItemRepository.deleteById(item.getId());
-            testItemRepository.insert(item);
+    private void updateTestItems(List<TestItem> testItems) {
+        testItems.forEach(item -> {
+            testItemRepository.update(item);
         });
     }
 

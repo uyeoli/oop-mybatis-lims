@@ -10,10 +10,9 @@ import java.util.List;
 @Setter
 public class Receipt {
     private Long id;
-    private Integer requestId;
+    private Long requestId;
     private String receiptName;
     private String receiptNumber;
-    private List<TestItem> testItems = new ArrayList<>();
     private Long approveId;
 
     public boolean isNew() {
