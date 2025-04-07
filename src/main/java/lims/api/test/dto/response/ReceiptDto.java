@@ -15,7 +15,7 @@ public class ReceiptDto {
     private Long id;
     private String receiptName;
     private String receiptNumber;
-    private List<TestItem> testItems = new ArrayList<>();
+    private List<TestItemDto> testItems = new ArrayList<>();
 
     public static ReceiptDto of(Receipt receipt) {
         ReceiptDto receiptDto = new ReceiptDto();
@@ -25,4 +25,13 @@ public class ReceiptDto {
         return receiptDto;
     }
 
+    @Override
+    public String toString() {
+        return "ReceiptDto{" +
+                "id=" + id +
+                ", receiptName='" + receiptName + '\'' +
+                ", receiptNumber='" + receiptNumber + '\'' +
+                ", testItems=" + testItems +
+                '}';
+    }
 }

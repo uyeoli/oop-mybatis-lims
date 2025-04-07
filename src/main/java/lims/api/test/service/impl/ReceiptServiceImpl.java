@@ -7,6 +7,7 @@ import lims.api.approve.service.ApprovalService;
 import lims.api.test.dto.request.ReceiptApproverInfoDto;
 import lims.api.test.dto.request.ReceiptInfoDto;
 import lims.api.test.dto.response.ReceiptDto;
+import lims.api.test.dto.response.TestItemDto;
 import lims.api.test.entity.Receipt;
 import lims.api.test.entity.TestItem;
 import lims.api.test.repository.ReceiptRepository;
@@ -31,7 +32,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     public List<ReceiptDto> findAll() {
         List<ReceiptDto> receiptList = receiptRepository.findAll().stream().map(ReceiptDto::of).toList();
         receiptList.forEach(receipt -> {
-            receipt.setTestItems(testItemRepository.findItems(receipt.getId()));
+            receipt.setTestItems(testItemRepository.findItems(receipt.getId()).stream().map(TestItemDto::of).toList());
         });
         return receiptList;
     }
