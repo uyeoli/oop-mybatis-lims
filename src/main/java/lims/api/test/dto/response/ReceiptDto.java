@@ -25,13 +25,4 @@ public class ReceiptDto {
         return receiptDto;
     }
 
-    @Override
-    public String toString() {
-        return "ReceiptDto{" +
-                "id=" + id +
-                ", receiptName='" + receiptName + '\'' +
-                ", receiptNumber='" + receiptNumber + '\'' +
-                ", testItems=" + testItems +
-                '}';
-    }
 }
