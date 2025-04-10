@@ -1,7 +1,7 @@
 package lims.api.test.controller;
 
 
-import lims.api.test.dto.request.ReceiptApproverInfoDto;
+import lims.api.test.dto.request.ReceiptApproveDto;
 import lims.api.test.dto.request.ReceiptInfoDto;
 import lims.api.test.dto.response.ReceiptDto;
 import lims.api.test.service.ReceiptService;
@@ -9,11 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/test/receipts")
+@RequestMapping("/receipts")
 @RequiredArgsConstructor
 public class ReceiptController {
     private final ReceiptService receiptService;
@@ -32,9 +31,9 @@ public class ReceiptController {
         receiptService.delete(id);
     }
 
-    @PutMapping("/{id}")
-    public void approveRequest(@PathVariable Long id, @RequestBody List<ReceiptApproverInfoDto> receiptApproverInfoDto) {
-        receiptService.approveRequest(id, receiptApproverInfoDto);
+    @PutMapping("/{id}/approval")
+    public void draft(@PathVariable Long id, @RequestBody List<ReceiptApproveDto> receiptApproveDto) {
+        receiptService.draft(id, receiptApproveDto);
     }
 
 

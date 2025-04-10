@@ -12,9 +12,4 @@ public class Request {
     private String sampleName;
     private Integer sampleQuantity;
 
-    public boolean isNew() {
-        return this.id == null || this.id == 0;
-    }
-
-
 }

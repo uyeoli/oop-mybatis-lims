@@ -18,7 +18,6 @@ public class ReceiptInfoDto {
     private Long requestId;
     private List<ReceiptTestItemInfoDto> testItems = new ArrayList<>();
 
-//    private List<TestItem> testItems = new ArrayList<>();
     public Receipt toReceiptEntity(ReceiptInfoDto receiptInfoDto) {
         Receipt receipt = new Receipt();
         receipt.setId(receiptInfoDto.getId());
