@@ -5,10 +5,9 @@ import lims.api.approve.dto.request.RejectInfoDto;
 import lims.api.approve.dto.response.ApproveDto;
 import lims.api.approve.entity.Approval;
 import lims.api.approve.entity.Approver;
-import lims.api.approve.enums.ApprovalRequestDomain;
-import lims.api.common.enums.UseType;
 import lims.api.approve.repository.ApprovalRepository;
 import lims.api.approve.service.ApprovalService;
+import lims.api.common.enums.UseType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +23,10 @@ public class ApprovalServiceImpl implements ApprovalService {
     }
 
     @Override
-    public Approval approveRequest(ApprovalRequestDomain approvalRequestDomain, List<Approver> approvers) {
-        Approval approval = new Approval(approvalRequestDomain);
+    public Approval draft(List<Approver> approvers) {
+        Approval approval = new Approval();
         createApprove(approval); //Approval - 승인, Approver - 승인자
         saveApprovers(approval.getId(), approvers);
-
         return approval;
     }
 
@@ -43,6 +41,7 @@ public class ApprovalServiceImpl implements ApprovalService {
             approvalRepository.insertApprover(approver);
         });
     }
+
     //승인 요청 - 승인 , 반려
     @Override
     public void approve(ApproveInfoDto approveInfoDto) {
@@ -55,5 +54,6 @@ public class ApprovalServiceImpl implements ApprovalService {
         Approver approver = RejectInfoDto.of(rejectInfoDto);
         approvalRepository.reject(approver);
     }
+
 
 }
