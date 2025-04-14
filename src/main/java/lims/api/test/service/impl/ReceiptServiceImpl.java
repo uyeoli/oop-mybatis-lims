@@ -3,8 +3,9 @@ package lims.api.test.service.impl;
 import lims.api.approve.entity.Approval;
 import lims.api.approve.entity.Approver;
 import lims.api.approve.service.ApprovalService;
+import lims.api.test.dto.request.ModifyReceiptDto;
 import lims.api.test.dto.request.ReceiptApproveDto;
-import lims.api.test.dto.request.ReceiptInfoDto;
+import lims.api.test.dto.request.CreateReceiptDto;
 import lims.api.test.dto.response.ReceiptDto;
 import lims.api.test.dto.response.TestItemDto;
 import lims.api.test.entity.Receipt;
@@ -26,6 +27,7 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public List<ReceiptDto> findAll() {
+        //ReceiptDto는 존재하지않는 애라 정적팩토리 메소드 사용. -> 정적팩토리 사용안하고 일반 메소드 사용 시 문맥상 맞지 않음 -> new ReceiptDto().of ?
         List<ReceiptDto> receiptList = receiptRepository.findAll().stream().map(ReceiptDto::of).toList();
         receiptList.forEach(receipt -> {
             receipt.setTestItems(testItemRepository.findItems(receipt.getId()).stream().map(TestItemDto::of).toList());
@@ -34,16 +36,24 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
     @Override
-    public void save(ReceiptInfoDto receiptInfoDto) {
-        Receipt receipt = receiptInfoDto.toReceiptEntity(receiptInfoDto);
-        List<TestItem> testItems = receiptInfoDto.getTestItems().stream().map(item -> item.toTestItemEntity(item)).toList();
-        if(receipt.isNew()) {
-            receiptRepository.insert(receipt);
-            insertTestItems(testItems, receipt.getId());
-        } else {
-            receiptRepository.update(receipt);
-            updateTestItems(testItems);
-        }
+    public void create(CreateReceiptDto createReceiptDto) {
+        Receipt receipt = createReceiptDto.toEntity();
+        receiptRepository.insert(receipt);
+
+
+        List<TestItem> testItems = createReceiptDto.getTestItems().stream().map(item -> item.toEntity(item)).toList();
+        insertTestItems(testItems, receipt.getId());
+//            receiptRepository.update(receipt);
+//            updateTestItems(testItems);
+    }
+
+    @Override
+    public void modify(ModifyReceiptDto modifyReceiptDto) {
+
+        //수정할 접수 정보 -> entity로 변환
+        //접수 update
+        //수정된 시험항목 정보 -> { 수정된 시험항목 , 추가된 시험항목, 삭제된 시험항목 }
+
     }
 
     private void insertTestItems(List<TestItem> testItems, Long receiptId) {
@@ -51,7 +61,6 @@ public class ReceiptServiceImpl implements ReceiptService {
             item.setReceiptId(receiptId);
             testItemRepository.insert(item);
         });
-
     }
 
     private void updateTestItems(List<TestItem> testItems) {

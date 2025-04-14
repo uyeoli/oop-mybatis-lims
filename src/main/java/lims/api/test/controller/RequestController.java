@@ -30,8 +30,8 @@ public class RequestController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody ModifyRequestDto modifyRequestDto) {
-        requestService.update(id, modifyRequestDto);
+    public void modify(@PathVariable Long id, @RequestBody ModifyRequestDto modifyRequestDto) {
+        requestService.modify(id, modifyRequestDto);
     }
 
     @DeleteMapping("/{id}")

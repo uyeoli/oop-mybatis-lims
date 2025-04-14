@@ -46,7 +46,7 @@ public class ResultInputServiceImpl implements ResultInputService {
     }
 
     @Override
-    public void update(ModifyResultInputDto modifyResultInputDto) {
+    public void modify(ModifyResultInputDto modifyResultInputDto) {
         ResultInput resultInput = modifyResultInputDto.toResultInputEntity(modifyResultInputDto);
         List<TestItemResult> modifiedTestItemResults = modifyResultInputDto.getTestItemResults().stream().map(item -> item.toTestItemResultEntity(item)).toList();
 
