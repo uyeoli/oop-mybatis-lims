@@ -3,6 +3,7 @@ package lims.api.test.controller;
 import lims.api.test.dto.request.CreateResultInputDto;
 import lims.api.test.dto.request.ModifyResultInputDto;
 import lims.api.test.dto.request.ResultInputApproveDto;
+import lims.api.test.dto.response.ResultInputDto;
 import lims.api.test.service.ResultInputService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +24,8 @@ public class ResultInputController {
      */
 
     @GetMapping
-    public ResponseEntity<List<CreateResultInputDto>> findAll() {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<List<ResultInputDto>> findAll() {
+        return ResponseEntity.ok(resultInputService.findAll());
     }
 
     @PostMapping
@@ -33,8 +34,8 @@ public class ResultInputController {
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody ModifyResultInputDto modifyResultInputDto) {
-        resultInputService.update(modifyResultInputDto);
+    public void modify(@RequestBody ModifyResultInputDto modifyResultInputDto) {
+        resultInputService.modify(modifyResultInputDto);
     }
 
     @PutMapping("/{id}/approval")

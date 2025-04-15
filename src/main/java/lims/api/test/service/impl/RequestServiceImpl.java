@@ -29,7 +29,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public void update(Long id, ModifyRequestDto modifyRequestDto) {
+    public void modify(Long id, ModifyRequestDto modifyRequestDto) {
         Request request = requestRepository.findById(id);
         requestRepository.update(request);
     }

@@ -12,5 +12,5 @@ public interface RequestService {
     List<RequestDto> findAll();
     void delete(Long id);
 
-    void update(Long id, ModifyRequestDto modifyRequestDto);
+    void modify(Long id, ModifyRequestDto modifyRequestDto);
 }

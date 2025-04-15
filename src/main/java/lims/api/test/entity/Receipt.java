@@ -14,9 +14,7 @@ public class Receipt {
     private String receiptName;
     private String receiptNumber;
     private Long approveId;
+    private List<TestItem> testItems;
 
-    public boolean isNew() {
-        return this.id == null || this.id == 0;
-    }
 
 }

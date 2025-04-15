@@ -14,7 +14,7 @@ public interface ResultInputService {
 
     void delete(Long id);
 
-    void update(ModifyResultInputDto modifyResultInputDto);
+    void modify(ModifyResultInputDto modifyResultInputDto);
 
     void draft(Long id, List<ResultInputApproveDto> resultInputApprovers);
 }

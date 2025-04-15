@@ -2,7 +2,7 @@ package lims.api.test.controller;
 
 
 import lims.api.test.dto.request.ReceiptApproveDto;
-import lims.api.test.dto.request.ReceiptInfoDto;
+import lims.api.test.dto.request.CreateReceiptDto;
 import lims.api.test.dto.response.ReceiptDto;
 import lims.api.test.service.ReceiptService;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +22,13 @@ public class ReceiptController {
     }
 
     @PostMapping
-    public void save(@RequestBody ReceiptInfoDto receiptInfoDto) {
-        receiptService.save(receiptInfoDto);
+    public void create(@RequestBody CreateReceiptDto createReceiptDto) {
+        receiptService.create(createReceiptDto);
+    }
+
+    @PostMapping
+    public void modify(@RequestBody CreateReceiptDto createReceiptDto) {
+        receiptService.create(createReceiptDto);
     }
 
     @DeleteMapping("/{id}")
