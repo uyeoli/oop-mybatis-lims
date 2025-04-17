@@ -1,7 +1,7 @@
 package lims.api.test.controller;
 
-import lims.api.test.dto.request.CreateResultInputDto;
-import lims.api.test.dto.request.ModifyResultInputDto;
+import lims.api.test.dto.request.ResultInputCreateDto;
+import lims.api.test.dto.request.ResultInputModifyDto;
 import lims.api.test.dto.request.ResultInputApproveDto;
 import lims.api.test.dto.response.ResultInputDto;
 import lims.api.test.service.ResultInputService;
@@ -29,13 +29,13 @@ public class ResultInputController {
     }
 
     @PostMapping
-    public void create(@RequestBody CreateResultInputDto createResultInputDto) {
-        resultInputService.create(createResultInputDto);
+    public void create(@RequestBody ResultInputCreateDto resultInputCreateDto) {
+        resultInputService.insert(resultInputCreateDto);
     }
 
     @PutMapping("/{id}")
-    public void modify(@RequestBody ModifyResultInputDto modifyResultInputDto) {
-        resultInputService.modify(modifyResultInputDto);
+    public void modify(@RequestBody ResultInputModifyDto resultInputModifyDto) {
+        resultInputService.update(resultInputModifyDto);
     }
 
     @PutMapping("/{id}/approval")

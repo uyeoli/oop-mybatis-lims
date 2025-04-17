@@ -3,9 +3,9 @@ package lims.api.test.service.impl;
 import lims.api.approve.entity.Approval;
 import lims.api.approve.entity.Approver;
 import lims.api.approve.service.ApprovalService;
-import lims.api.test.dto.request.ModifyReceiptDto;
+import lims.api.test.dto.request.ReceiptModifyDto;
 import lims.api.test.dto.request.ReceiptApproveDto;
-import lims.api.test.dto.request.CreateReceiptDto;
+import lims.api.test.dto.request.ReceiptCreateDto;
 import lims.api.test.dto.response.ReceiptDto;
 import lims.api.test.dto.response.TestItemDto;
 import lims.api.test.entity.Receipt;
@@ -13,6 +13,7 @@ import lims.api.test.entity.TestItem;
 import lims.api.test.repository.ReceiptRepository;
 import lims.api.test.repository.TestItemRepository;
 import lims.api.test.service.ReceiptService;
+import lims.api.test.vo.ReceiptTestItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,28 +28,26 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public List<ReceiptDto> findAll() {
-        //ReceiptDto는 존재하지않는 애라 정적팩토리 메소드 사용. -> 정적팩토리 사용안하고 일반 메소드 사용 시 문맥상 맞지 않음 -> new ReceiptDto().of ?
         List<ReceiptDto> receiptList = receiptRepository.findAll().stream().map(ReceiptDto::of).toList();
-        receiptList.forEach(receipt -> {
-            receipt.setTestItems(testItemRepository.findItems(receipt.getId()).stream().map(TestItemDto::of).toList());
-        });
+        setItems(receiptList);
         return receiptList;
     }
 
-    @Override
-    public void create(CreateReceiptDto createReceiptDto) {
-        Receipt receipt = createReceiptDto.toEntity();
-        receiptRepository.insert(receipt);
-
-
-        List<TestItem> testItems = createReceiptDto.getTestItems().stream().map(item -> item.toEntity(item)).toList();
-        insertTestItems(testItems, receipt.getId());
-//            receiptRepository.update(receipt);
-//            updateTestItems(testItems);
+    private void setItems(List<ReceiptDto> receiptList) {
+        receiptList.forEach(receipt -> {
+            receipt.setTestItems(testItemRepository.findItems(receipt.getId()).stream().map(TestItemDto::of).toList());
+        });
     }
 
     @Override
-    public void modify(ModifyReceiptDto modifyReceiptDto) {
+    public void insert(ReceiptCreateDto receiptCreateDto) {
+        Receipt receipt = receiptCreateDto.toReceiptEntity();
+        receiptRepository.insert(receipt);
+        insertTestItems(receiptCreateDto.getTestItems(), receipt.getId());
+    }
+
+    @Override
+    public void update(ReceiptModifyDto receiptModifyDto) {
 
         //수정할 접수 정보 -> entity로 변환
         //접수 update
@@ -56,7 +55,8 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     }
 
-    private void insertTestItems(List<TestItem> testItems, Long receiptId) {
+    private void insertTestItems(List<ReceiptTestItem> receiptTestItems, Long receiptId) {
+        List<TestItem> testItems = receiptTestItems.stream().map(item -> item.toEntity()).toList();
         testItems.forEach(item -> {
             item.setReceiptId(receiptId);
             testItemRepository.insert(item);

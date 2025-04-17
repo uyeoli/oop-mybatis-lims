@@ -3,8 +3,8 @@ package lims.api.test.service.impl;
 import lims.api.approve.entity.Approval;
 import lims.api.approve.entity.Approver;
 import lims.api.approve.service.ApprovalService;
-import lims.api.test.dto.request.CreateResultInputDto;
-import lims.api.test.dto.request.ModifyResultInputDto;
+import lims.api.test.dto.request.ResultInputCreateDto;
+import lims.api.test.dto.request.ResultInputModifyDto;
 import lims.api.test.dto.request.ResultInputApproveDto;
 import lims.api.test.dto.response.ResultInputDto;
 import lims.api.test.entity.ResultInput;
@@ -30,9 +30,9 @@ public class ResultInputServiceImpl implements ResultInputService {
     }
 
     @Override
-    public void create(CreateResultInputDto createResultInputDto) {
-        ResultInput resultInput = createResultInputDto.toResultInputEntity(createResultInputDto);
-        List<TestItemResult> testItemResults = createResultInputDto.getTestItemResults().stream().map(item -> item.toTestItemResultEntity(item)).toList();
+    public void insert(ResultInputCreateDto resultInputCreateDto) {
+        ResultInput resultInput = resultInputCreateDto.toResultInputEntity(resultInputCreateDto);
+        List<TestItemResult> testItemResults = resultInputCreateDto.getTestItemResults().stream().map(item -> item.toTestItemResultEntity(item)).toList();
 
         resultInputRepository.insert(resultInput);
         insertTestItemResult(testItemResults, resultInput.getId());
@@ -46,9 +46,9 @@ public class ResultInputServiceImpl implements ResultInputService {
     }
 
     @Override
-    public void modify(ModifyResultInputDto modifyResultInputDto) {
-        ResultInput resultInput = modifyResultInputDto.toResultInputEntity(modifyResultInputDto);
-        List<TestItemResult> modifiedTestItemResults = modifyResultInputDto.getTestItemResults().stream().map(item -> item.toTestItemResultEntity(item)).toList();
+    public void update(ResultInputModifyDto resultInputModifyDto) {
+        ResultInput resultInput = resultInputModifyDto.toResultInputEntity(resultInputModifyDto);
+        List<TestItemResult> modifiedTestItemResults = resultInputModifyDto.getTestItemResults().stream().map(item -> item.toTestItemResultEntity(item)).toList();
 
         resultInputRepository.update(resultInput);
         updateTestItemResults(modifiedTestItemResults);

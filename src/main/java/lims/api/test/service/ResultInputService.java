@@ -1,7 +1,7 @@
 package lims.api.test.service;
 
-import lims.api.test.dto.request.CreateResultInputDto;
-import lims.api.test.dto.request.ModifyResultInputDto;
+import lims.api.test.dto.request.ResultInputCreateDto;
+import lims.api.test.dto.request.ResultInputModifyDto;
 import lims.api.test.dto.request.ResultInputApproveDto;
 import lims.api.test.dto.response.ResultInputDto;
 
@@ -10,11 +10,11 @@ import java.util.List;
 public interface ResultInputService {
     List<ResultInputDto> findAll();
 
-    void create(CreateResultInputDto createResultInputDto);
+    void insert(ResultInputCreateDto resultInputCreateDto);
 
     void delete(Long id);
 
-    void modify(ModifyResultInputDto modifyResultInputDto);
+    void update(ResultInputModifyDto resultInputModifyDto);
 
     void draft(Long id, List<ResultInputApproveDto> resultInputApprovers);
 }

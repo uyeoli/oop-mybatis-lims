@@ -1,6 +1,5 @@
 package lims.api.test.repository;
 
-
 import java.util.List;
 
 public interface DataAccessRepository<E, ID> {

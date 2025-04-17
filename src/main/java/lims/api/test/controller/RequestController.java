@@ -1,8 +1,8 @@
 package lims.api.test.controller;
 
 
-import lims.api.test.dto.request.CreateRequestDto;
-import lims.api.test.dto.request.ModifyRequestDto;
+import lims.api.test.dto.request.RequestCreateDto;
+import lims.api.test.dto.request.RequestModifyDto;
 import lims.api.test.dto.response.RequestDto;
 import lims.api.test.service.RequestService;
 import lombok.RequiredArgsConstructor;
@@ -25,13 +25,13 @@ public class RequestController {
     }
 
     @PostMapping
-    public void create(@RequestBody CreateRequestDto createRequestDto) {
-        requestService.create(createRequestDto);
+    public void create(@RequestBody RequestCreateDto requestCreateDto) {
+        requestService.insert(requestCreateDto);
     }
 
     @PutMapping("/{id}")
-    public void modify(@PathVariable Long id, @RequestBody ModifyRequestDto modifyRequestDto) {
-        requestService.modify(id, modifyRequestDto);
+    public void modify(@PathVariable Long id, @RequestBody RequestModifyDto requestModifyDto) {
+        requestService.update(id, requestModifyDto);
     }
 
     @DeleteMapping("/{id}")

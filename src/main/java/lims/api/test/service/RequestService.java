@@ -1,16 +1,16 @@
 package lims.api.test.service;
 
-import lims.api.test.dto.request.CreateRequestDto;
-import lims.api.test.dto.request.ModifyRequestDto;
+import lims.api.test.dto.request.RequestCreateDto;
+import lims.api.test.dto.request.RequestModifyDto;
 import lims.api.test.dto.response.RequestDto;
 
 import java.util.List;
 
 public interface RequestService {
 
-    void create(CreateRequestDto testRequestDto);
+    void insert(RequestCreateDto testRequestDto);
     List<RequestDto> findAll();
     void delete(Long id);
 
-    void modify(Long id, ModifyRequestDto modifyRequestDto);
+    void update(Long id, RequestModifyDto requestModifyDto);
 }

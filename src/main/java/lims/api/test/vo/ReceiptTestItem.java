@@ -13,10 +13,10 @@ public class ReceiptTestItem {
         this.itemName = itemName;
     }
 
-    public TestItem toEntity(ReceiptTestItem receiptTestItem) {
+    public TestItem toEntity() {
         TestItem testItem = new TestItem();
-        testItem.setReceiptId(receiptTestItem.getReceiptId());
-        testItem.setItemName(receiptTestItem.getItemName());
+        testItem.setReceiptId(this.getReceiptId());
+        testItem.setItemName(this.getItemName());
         return testItem;
     }
 }

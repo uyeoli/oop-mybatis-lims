@@ -9,13 +9,13 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ModifyResultInputDto {
+public class ResultInputModifyDto {
     private Long id;
-    private List<ModifyTestItemResultDto> testItemResults = new ArrayList<>();
+    private List<TestItemResultModifyDto> testItemResults = new ArrayList<>();
 
-    public ResultInput toResultInputEntity(ModifyResultInputDto modifyResultInputDto) {
+    public ResultInput toResultInputEntity(ResultInputModifyDto resultInputModifyDto) {
         ResultInput resultInput = new ResultInput();
-        resultInput.setReceiptId(modifyResultInputDto.getId());
+        resultInput.setReceiptId(resultInputModifyDto.getId());
         return resultInput;
     }
 }

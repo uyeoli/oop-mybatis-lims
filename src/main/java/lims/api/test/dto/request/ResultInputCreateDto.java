@@ -9,14 +9,14 @@ import java.util.List;
 
 @Getter
 @Setter
-public class CreateResultInputDto {
+public class ResultInputCreateDto {
 
     private Long receiptId;
-    private List<CreateTestItemResultDto> testItemResults = new ArrayList<>();
+    private List<TestItemResultCreateDto> testItemResults = new ArrayList<>();
 
-    public ResultInput toResultInputEntity(CreateResultInputDto createResultInputDto) {
+    public ResultInput toResultInputEntity(ResultInputCreateDto resultInputCreateDto) {
         ResultInput resultInput = new ResultInput();
-        resultInput.setReceiptId(createResultInputDto.getReceiptId());
+        resultInput.setReceiptId(resultInputCreateDto.getReceiptId());
         return resultInput;
     }
 
