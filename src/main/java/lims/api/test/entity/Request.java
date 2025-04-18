@@ -1,7 +1,7 @@
 package lims.api.test.entity;
 
 import lims.api.test.dto.request.RequestModifyDto;
-import lims.api.test.dto.response.RequestDto;
+import lims.api.test.enums.TestStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,11 +15,23 @@ public class Request {
     private String sampleName;
     private Integer sampleQuantity;
     private LocalDate requestDate;
+    private TestStatus testStatus;
 
-    public Request updateFrom(RequestModifyDto requestModifyDto) {
+    public Request modify(RequestModifyDto requestModifyDto) {
         this.setTestTitle(requestModifyDto.getTestTitle());
         this.setSampleName(requestModifyDto.getSampleName());
         this.setSampleQuantity(requestModifyDto.getSampleQuantity());
         return this;
     }
+
+    public void submit() {
+        if(this.testStatus != TestStatus.TEMPORARY_SAVE) {
+            throw new IllegalArgumentException("임시저장 상태에서만 의뢰할 수 있습니다.");
+        }
+        this.testStatus = TestStatus.REQUEST;
+    }
+
+
+
+
 }

@@ -1,7 +1,6 @@
 package lims.api.test.dto.request;
 
 import lims.api.test.entity.Receipt;
-import lims.api.test.vo.ReceiptTestItem;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +15,7 @@ public class ReceiptCreateDto {
     private Long requestId;
     private String receiptNumber;
     private LocalDate receiptDate;
-    private List<ReceiptTestItem> testItems = new ArrayList<>();
+    private List<ReceiptTestItemDto> testItems = new ArrayList<>();
 
     public Receipt toReceiptEntity() {
         Receipt receipt = new Receipt();

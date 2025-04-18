@@ -8,9 +8,12 @@ import java.util.List;
 
 public interface RequestService {
 
-    void insert(RequestCreateDto testRequestDto);
+    void create(RequestCreateDto testRequestDto);
     List<RequestDto> findAll();
     void delete(Long id);
 
     void update(Long id, RequestModifyDto requestModifyDto);
+
+    void submitRequest(Long id);
+
 }

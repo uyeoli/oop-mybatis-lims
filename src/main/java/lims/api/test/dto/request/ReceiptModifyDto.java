@@ -3,13 +3,18 @@ package lims.api.test.dto.request;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 public class ReceiptModifyDto {
 
-    //접수 데이터(키값 포함)
-    //시험항목
-
     private Long id;
+    private String receiptNumber;
+    private LocalDate receiptDate;
+    private List<ReceiptTestItemDto> testItems = new ArrayList<>();
+
 
 }

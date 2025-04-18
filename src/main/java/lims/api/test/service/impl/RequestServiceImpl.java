@@ -21,9 +21,8 @@ public class RequestServiceImpl implements RequestService {
         return requestRepository.findAll().stream().map(RequestDto::of).toList();
     }
 
-
     @Override
-    public void insert(RequestCreateDto requestCreateDto) {
+    public void create(RequestCreateDto requestCreateDto) {
         Request request = requestCreateDto.toEntity();
         requestRepository.insert(request);
     }
@@ -31,8 +30,15 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public void update(Long id, RequestModifyDto requestModifyDto) {
         Request request = requestRepository.findById(id);
-        request.updateFrom(requestModifyDto);
+        request.modify(requestModifyDto);
         requestRepository.update(request);
+    }
+
+    @Override
+    public void submitRequest(Long id) {
+        Request request = requestRepository.findById(id);
+        request.submit();
+        requestRepository.save(request);
     }
 
     @Override

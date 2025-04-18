@@ -13,7 +13,7 @@ import lims.api.test.entity.TestItem;
 import lims.api.test.repository.ReceiptRepository;
 import lims.api.test.repository.TestItemRepository;
 import lims.api.test.service.ReceiptService;
-import lims.api.test.vo.ReceiptTestItem;
+import lims.api.test.dto.request.ReceiptTestItemDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +35,8 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     private void setItems(List<ReceiptDto> receiptList) {
         receiptList.forEach(receipt -> {
-            receipt.setTestItems(testItemRepository.findItems(receipt.getId()).stream().map(TestItemDto::of).toList());
+            List<TestItem> items = testItemRepository.findItems(receipt.getId());
+            receipt.setTestItems(items.stream().map(TestItemDto::of).toList());
         });
     }
 
@@ -55,8 +56,8 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     }
 
-    private void insertTestItems(List<ReceiptTestItem> receiptTestItems, Long receiptId) {
-        List<TestItem> testItems = receiptTestItems.stream().map(item -> item.toEntity()).toList();
+    private void insertTestItems(List<ReceiptTestItemDto> receiptTestItemDtos, Long receiptId) {
+        List<TestItem> testItems = receiptTestItemDtos.stream().map(item -> item.toEntity()).toList();
         testItems.forEach(item -> {
             item.setReceiptId(receiptId);
             testItemRepository.insert(item);

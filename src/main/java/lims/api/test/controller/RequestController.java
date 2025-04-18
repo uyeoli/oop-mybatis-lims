@@ -24,9 +24,14 @@ public class RequestController {
         return ResponseEntity.ok(requestService.findAll());
     }
 
-    @PostMapping
+    @PostMapping()
     public void create(@RequestBody RequestCreateDto requestCreateDto) {
-        requestService.insert(requestCreateDto);
+        requestService.create(requestCreateDto);
+    }
+
+    @PutMapping("/{id}/submit")
+    public void submit(@PathVariable Long id) {
+        requestService.submitRequest(id);
     }
 
     @PutMapping("/{id}")
