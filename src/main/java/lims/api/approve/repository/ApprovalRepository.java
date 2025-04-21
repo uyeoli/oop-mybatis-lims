@@ -15,5 +15,7 @@ public interface ApprovalRepository {
     void approve(Approver approver);
     void reject(Approver approver);
 
-    List<Approver> findByApproveId(Long approveId);
+    List<Approver> findApprovers(Long approveId);
+
+    void finishApprove(Long id);
 }

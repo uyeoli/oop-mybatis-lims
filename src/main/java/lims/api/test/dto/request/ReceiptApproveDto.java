@@ -1,6 +1,7 @@
 package lims.api.test.dto.request;
 
-import lims.api.approve.entity.Approver;
+import lims.api.approve.vo.ApprovalParticipant;
+import lims.api.approve.vo.DraftedApprover;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,13 +10,10 @@ import lombok.Setter;
 @Setter
 public class ReceiptApproveDto {
 
-    private String approverName;
+    private DraftedApprover draftedApprover;
 
-
-    public static Approver of(ReceiptApproveDto receiptApproveDto) {
-        return Approver.builder()
-                .approverName(receiptApproveDto.getApproverName())
-                .build();
+    public ApprovalParticipant of() {
+        return this.draftedApprover;
     }
 
 }

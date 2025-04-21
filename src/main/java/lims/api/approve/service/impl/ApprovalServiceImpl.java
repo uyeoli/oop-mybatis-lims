@@ -2,33 +2,31 @@ package lims.api.approve.service.impl;
 
 import lims.api.approve.dto.request.ApproveInfoDto;
 import lims.api.approve.dto.request.RejectInfoDto;
-import lims.api.approve.dto.response.ApproveDto;
 import lims.api.approve.entity.Approval;
 import lims.api.approve.entity.Approver;
 import lims.api.approve.enums.ApprovalStatus;
 import lims.api.approve.repository.ApprovalRepository;
 import lims.api.approve.service.ApprovalService;
+import lims.api.approve.vo.ApprovalParticipant;
+import lims.api.approve.vo.DraftedApprover;
 import lims.api.common.enums.UseType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ApprovalServiceImpl implements ApprovalService {
     private final ApprovalRepository approvalRepository;
-    @Override
-    public List<ApproveDto> findAll() {
-        return null;
-    }
 
     @Override
-    public Approval draft(List<Approver> approvers) {
-        Approval approval = new Approval(LocalDate.now(), ApprovalStatus.DRAFT);//승인객체는 저장할때만 생성. 하지만 상태값은 계속 변함
-        createApprove(approval); //Approval - 승인, Approver - 승인자
-        saveApprovers(approval.getId(), approvers);
+    public Approval draft(List<ApprovalParticipant> approvalParticipants) {
+        Approval approval = new Approval(LocalDate.now(), ApprovalStatus.DRAFT);
+        createApprove(approval);
+        saveApprovers(approval.getId(), approvalParticipants);
         return approval;
     }
 
@@ -36,10 +34,10 @@ public class ApprovalServiceImpl implements ApprovalService {
         approvalRepository.insertApproval(approval);
     }
 
-    private void saveApprovers(Long approveId, List<Approver> approvers) {
+    private void saveApprovers(Long approveId, List<ApprovalParticipant> approvalParticipants) {
+        List<Approver> approvers = approvalParticipants.stream().map(ApprovalParticipant::toEntity).collect(Collectors.toList());
         approvers.forEach(approver -> {
             approver.setApproveId(approveId);
-            approver.setApproveYn(UseType.N);
             approvalRepository.insertApprover(approver);
         });
     }
@@ -50,14 +48,17 @@ public class ApprovalServiceImpl implements ApprovalService {
         Approver approver = ApproveInfoDto.of(approveInfoDto);
         approvalRepository.approve(approver);
 
-        isLastApprover(approver);
+        if(isLastApprover(approver)) {
+            approvalRepository.finishApprove(approveInfoDto.getId());
+        }
     }
 
-    private boolean isLastApprover(Approver approver) {
-        Long approveId = approver.getApproveId();
-        List<Approver> approvers = approvalRepository.findByApproveId(approveId);
+    private boolean isLastApprover(Approver currentApprover) {
+        Long approveId = currentApprover.getApproveId();
+        List<Approver> approvers = approvalRepository.findApprovers(approveId);
+        if(approvers.stream().iterator().next().getApproveYn().value() == UseType.N.value()) {
 
-
+        }
         return false;
     }
 
@@ -67,7 +68,5 @@ public class ApprovalServiceImpl implements ApprovalService {
         Approver approver = RejectInfoDto.of(rejectInfoDto);
         approvalRepository.reject(approver);
     }
-
-
 
 }
