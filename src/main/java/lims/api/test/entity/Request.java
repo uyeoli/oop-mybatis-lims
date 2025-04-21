@@ -29,6 +29,7 @@ public class Request {
             throw new IllegalArgumentException("임시저장 상태에서만 의뢰할 수 있습니다.");
         }
         this.testStatus = TestStatus.REQUEST;
+        this.requestDate = LocalDate.now();
     }
 
 

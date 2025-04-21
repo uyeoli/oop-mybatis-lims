@@ -13,7 +13,7 @@ public interface ReceiptService {
 
     void insert(ReceiptCreateDto receiptCreateDto);
 
-    void update(ReceiptModifyDto receiptModifyDto);
+    void update(Long id, ReceiptModifyDto receiptModifyDto);
 
     void delete(Long id);
 

@@ -1,5 +1,8 @@
 package lims.api.test.entity;
 
+import lims.api.test.dto.request.ReceiptModifyDto;
+import lims.api.test.dto.request.TestItemModifyDto;
+import lims.api.test.enums.TestStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +19,18 @@ public class Receipt {
     private Long approveId;
     private LocalDate receiptDate;
     private List<TestItem> testItems;
+    private TestStatus testStatus;
+
+
+    public void modify(ReceiptModifyDto receiptModifyDto) {
+        this.setReceiptNumber(receiptModifyDto.getReceiptNumber());
+        this.modifyTestItem(receiptModifyDto.getModifiedTestItems());
+    }
+
+    private void modifyTestItem(List<TestItemModifyDto> modifiedTestItems) {
+        List<TestItem> testItems = modifiedTestItems.stream().map(TestItemModifyDto::toEntity).toList();
+        this.setTestItems(testItems);
+    }
 
 
 }

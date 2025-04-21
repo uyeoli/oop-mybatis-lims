@@ -10,13 +10,11 @@ import lombok.Setter;
 public class ReceiptApproveDto {
 
     private String approverName;
-    private Integer approveOrder;
 
 
     public static Approver of(ReceiptApproveDto receiptApproveDto) {
         return Approver.builder()
                 .approverName(receiptApproveDto.getApproverName())
-                .approveOrder(receiptApproveDto.approveOrder)
                 .build();
     }
 

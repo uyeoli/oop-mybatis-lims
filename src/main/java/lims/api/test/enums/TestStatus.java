@@ -1,8 +1,9 @@
 package lims.api.test.enums;
 
 public enum TestStatus {
-    TEMPORARY_SAVE,
+    REQUEST_TEMPORARY_SAVE,
     REQUEST,
+    RECEIPT_TEMPORARY_SAVE,
     RECEIPT,
     RESULT_INPUT
 }

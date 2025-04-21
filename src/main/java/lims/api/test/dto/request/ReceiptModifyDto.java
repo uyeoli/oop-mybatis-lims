@@ -1,5 +1,6 @@
 package lims.api.test.dto.request;
 
+import lims.api.test.entity.TestItem;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,10 +12,8 @@ import java.util.List;
 @Setter
 public class ReceiptModifyDto {
 
-    private Long id;
     private String receiptNumber;
     private LocalDate receiptDate;
-    private List<ReceiptTestItemDto> testItems = new ArrayList<>();
-
+    private List<TestItemModifyDto> modifiedTestItems = new ArrayList<>();
 
 }

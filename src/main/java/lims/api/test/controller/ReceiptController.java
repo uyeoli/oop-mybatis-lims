@@ -28,8 +28,8 @@ public class ReceiptController {
     }
 
     @PostMapping
-    public void modify(@RequestBody ReceiptModifyDto receiptModifyDto) {
-        receiptService.update(receiptModifyDto);
+    public void modify(Long id, @RequestBody ReceiptModifyDto receiptModifyDto) {
+        receiptService.update(id, receiptModifyDto);
     }
 
     @DeleteMapping("/{id}")

@@ -10,8 +10,7 @@ import lombok.Setter;
 @Setter
 public class Approver {
     private Long id;
-    private String approverName;
-    private Integer approveOrder;
     private Long approveId;
+    private String approverName;
     private UseType approveYn;
 }

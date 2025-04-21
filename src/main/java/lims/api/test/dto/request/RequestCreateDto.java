@@ -23,7 +23,6 @@ public class RequestCreateDto {
         request.setTestTitle(this.getTestTitle());
         request.setSampleName(this.getSampleName());
         request.setSampleQuantity(this.getSampleQuantity());
-        request.setRequestDate(LocalDate.now());
         request.setTestStatus(this.testStatus);
         return request;
     }

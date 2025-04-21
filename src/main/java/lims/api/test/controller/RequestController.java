@@ -26,7 +26,7 @@ public class RequestController {
 
     @PostMapping()
     public void create(@RequestBody RequestCreateDto requestCreateDto) {
-        requestService.create(requestCreateDto);
+        requestService.insert(requestCreateDto);
     }
 
     @PutMapping("/{id}/submit")

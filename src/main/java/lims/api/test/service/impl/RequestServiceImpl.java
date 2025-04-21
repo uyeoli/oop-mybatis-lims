@@ -22,7 +22,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public void create(RequestCreateDto requestCreateDto) {
+    public void insert(RequestCreateDto requestCreateDto) {
         Request request = requestCreateDto.toEntity();
         requestRepository.insert(request);
     }

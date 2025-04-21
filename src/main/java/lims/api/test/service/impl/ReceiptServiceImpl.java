@@ -3,9 +3,7 @@ package lims.api.test.service.impl;
 import lims.api.approve.entity.Approval;
 import lims.api.approve.entity.Approver;
 import lims.api.approve.service.ApprovalService;
-import lims.api.test.dto.request.ReceiptModifyDto;
-import lims.api.test.dto.request.ReceiptApproveDto;
-import lims.api.test.dto.request.ReceiptCreateDto;
+import lims.api.test.dto.request.*;
 import lims.api.test.dto.response.ReceiptDto;
 import lims.api.test.dto.response.TestItemDto;
 import lims.api.test.entity.Receipt;
@@ -13,7 +11,6 @@ import lims.api.test.entity.TestItem;
 import lims.api.test.repository.ReceiptRepository;
 import lims.api.test.repository.TestItemRepository;
 import lims.api.test.service.ReceiptService;
-import lims.api.test.dto.request.ReceiptTestItemDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +26,11 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Override
     public List<ReceiptDto> findAll() {
         List<ReceiptDto> receiptList = receiptRepository.findAll().stream().map(ReceiptDto::of).toList();
-        setItems(receiptList);
+        setTestItems(receiptList);
         return receiptList;
     }
 
-    private void setItems(List<ReceiptDto> receiptList) {
+    private void setTestItems(List<ReceiptDto> receiptList) {
         receiptList.forEach(receipt -> {
             List<TestItem> items = testItemRepository.findItems(receipt.getId());
             receipt.setTestItems(items.stream().map(TestItemDto::of).toList());
@@ -44,30 +41,30 @@ public class ReceiptServiceImpl implements ReceiptService {
     public void insert(ReceiptCreateDto receiptCreateDto) {
         Receipt receipt = receiptCreateDto.toReceiptEntity();
         receiptRepository.insert(receipt);
-        insertTestItems(receiptCreateDto.getTestItems(), receipt.getId());
+
+        insertTestItems(receipt.getId(), receiptCreateDto.getTestItems());
     }
 
-    @Override
-    public void update(ReceiptModifyDto receiptModifyDto) {
-
-        //수정할 접수 정보 -> entity로 변환
-        //접수 update
-        //수정된 시험항목 정보 -> { 수정된 시험항목 , 추가된 시험항목, 삭제된 시험항목 }
-
-    }
-
-    private void insertTestItems(List<ReceiptTestItemDto> receiptTestItemDtos, Long receiptId) {
-        List<TestItem> testItems = receiptTestItemDtos.stream().map(item -> item.toEntity()).toList();
+    private void insertTestItems(Long receiptId, List<TestItemCreateDto> createItems) {
+        List<TestItem> testItems = createItems.stream().map(item -> item.toEntity()).toList();
         testItems.forEach(item -> {
             item.setReceiptId(receiptId);
             testItemRepository.insert(item);
         });
     }
 
-    private void updateTestItems(List<TestItem> testItems) {
-        testItems.forEach(item -> {
-            testItemRepository.update(item);
-        });
+    @Override
+    public void update(Long id, ReceiptModifyDto receiptModifyDto) {
+        Receipt receipt = receiptRepository.findById(id);
+        receipt.modify(receiptModifyDto);
+        receiptRepository.update(receipt);
+
+        updateTestItems(id, receipt.getTestItems());
+    }
+
+    private void updateTestItems(Long receiptId, List<TestItem> modifiedTestItems) {
+        testItemRepository.deleteByReceiptId(receiptId);
+        modifiedTestItems.forEach(item -> testItemRepository.insert(item));
     }
 
     @Override

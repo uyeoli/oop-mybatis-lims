@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RequestService {
 
-    void create(RequestCreateDto testRequestDto);
+    void insert(RequestCreateDto testRequestDto);
     List<RequestDto> findAll();
     void delete(Long id);
 
