@@ -25,7 +25,7 @@ public class Request {
     }
 
     public void submit() {
-        if(this.testStatus != TestStatus.TEMPORARY_SAVE) {
+        if(this.testStatus != TestStatus.REQUEST_TEMPORARY_SAVE) {
             throw new IllegalArgumentException("임시저장 상태에서만 의뢰할 수 있습니다.");
         }
         this.testStatus = TestStatus.REQUEST;

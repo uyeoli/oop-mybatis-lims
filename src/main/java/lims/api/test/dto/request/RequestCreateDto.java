@@ -16,7 +16,7 @@ public class RequestCreateDto {
     private String sampleName;
     private Integer sampleQuantity;
     private LocalDate requestDate;
-    private final TestStatus testStatus = TestStatus.TEMPORARY_SAVE;
+    private final TestStatus testStatus = TestStatus.REQUEST_TEMPORARY_SAVE;
 
     public Request toEntity() {
         Request request = new Request();
