@@ -1,15 +1,14 @@
 package lims.api.approve.service.impl;
 
-import lims.api.approve.dto.request.ApproveInfoDto;
+import lims.api.approve.dto.request.ApproverInfoDto;
 import lims.api.approve.dto.request.RejectInfoDto;
 import lims.api.approve.entity.Approval;
 import lims.api.approve.entity.Approver;
 import lims.api.approve.enums.ApprovalStatus;
+import lims.api.approve.enums.ApproverType;
 import lims.api.approve.repository.ApprovalRepository;
 import lims.api.approve.service.ApprovalService;
 import lims.api.approve.vo.ApprovalParticipant;
-import lims.api.approve.vo.DraftedApprover;
-import lims.api.common.enums.UseType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -44,26 +43,28 @@ public class ApprovalServiceImpl implements ApprovalService {
 
     // 승인 시 승인자의 상태값 변경.
     @Override
-    public void approve(ApproveInfoDto approveInfoDto) {
-        Approver approver = ApproveInfoDto.of(approveInfoDto);
+    public void approve(Long approvalId, ApproverInfoDto approverInfoDto) {
+        Approver approver = ApproverInfoDto.of(approverInfoDto);
         approvalRepository.approve(approver);
 
-        if(isLastApprover(approver)) {
-            approvalRepository.finishApprove(approveInfoDto.getId());
+        if(isFinish(approvalId)) {
+            finishApproval(approvalId);
         }
     }
 
-    private boolean isLastApprover(Approver currentApprover) {
-        Long approveId = currentApprover.getApproveId();
-        List<Approver> approvers = approvalRepository.findApprovers(approveId);
-        if(approvers.stream().iterator().next().getApproveYn().value() == UseType.N.value()) {
+    private boolean isFinish(Long approvalId) {
+        List<Approver> approvers = approvalRepository.findApprovers(approvalId);
+        return approvers.stream()
+                .allMatch(approver -> approver.getApproverType() == ApproverType.APPROVE);
+    }
 
-        }
-        return false;
+    private void finishApproval(Long approvalId) {
+        Approval approval = approvalRepository.findById(approvalId);
+        approval.complete();
+        approvalRepository.finishApproval(approval);
     }
 
     @Override
-    //반려 시 승인의 상태값 변경
     public void reject(RejectInfoDto rejectInfoDto) {
         Approver approver = RejectInfoDto.of(rejectInfoDto);
         approvalRepository.reject(approver);

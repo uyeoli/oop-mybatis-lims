@@ -1,13 +1,13 @@
 package lims.api.approve.vo;
 
-import lims.api.common.enums.UseType;
+import lims.api.approve.enums.ApproverType;
 import lombok.Getter;
 
 @Getter
 public class DraftedApprover extends ApprovalParticipant {
 
     public DraftedApprover(String name) {
-        super(name, UseType.N);
+        super(name, ApproverType.DRAFTED);
     }
 
 

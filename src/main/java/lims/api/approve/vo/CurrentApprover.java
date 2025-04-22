@@ -1,13 +1,18 @@
 package lims.api.approve.vo;
 
-import lims.api.common.enums.UseType;
+import lims.api.approve.enums.ApproverType;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class CurrentApprover extends ApprovalParticipant{
 
     public CurrentApprover(String name) {
-        super(name, UseType.Y);
+        super(name, ApproverType.APPROVE);
     }
+
+
+
 }
 

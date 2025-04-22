@@ -2,6 +2,7 @@ package lims.api.approve.enums;
 
 public enum ApprovalStatus {
     DRAFT,
-    APPROVE,
+    APPROVING,
+    APPROVE_COMPLETE,
     REJECT
 }

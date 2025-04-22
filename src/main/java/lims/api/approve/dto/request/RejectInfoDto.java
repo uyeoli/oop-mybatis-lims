@@ -1,6 +1,7 @@
 package lims.api.approve.dto.request;
 
 import lims.api.approve.entity.Approver;
+import lims.api.approve.vo.Companion;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,13 +9,13 @@ import lombok.Setter;
 @Setter
 public class RejectInfoDto {
     private Long approveId;
-    private String approverName;
+    private Companion companion;
 
 
     public static Approver of(RejectInfoDto rejectInfoDto) {
         return Approver.builder()
                 .id(rejectInfoDto.approveId)
-                .approverName(rejectInfoDto.approverName)
+                .approverName(rejectInfoDto.companion.getName())
                 .build();
     }
 }

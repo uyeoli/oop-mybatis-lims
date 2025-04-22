@@ -1,6 +1,5 @@
 package lims.api.test.dto.request;
 
-import lims.api.approve.entity.Approver;
 import lims.api.approve.vo.ApprovalParticipant;
 import lims.api.approve.vo.DraftedApprover;
 import lombok.Getter;

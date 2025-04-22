@@ -18,4 +18,8 @@ public class Approval{
         this.approvalStatus = approvalStatus;
     }
 
+    public void complete() {
+        this.approvalStatus = ApprovalStatus.APPROVE_COMPLETE;
+    }
+
 }

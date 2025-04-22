@@ -17,13 +17,13 @@ public class ReceiptCreateDto {
     private String receiptNumber;
     private LocalDate receiptDate;
     private List<TestItemCreateDto> testItems = new ArrayList<>();
-    private TestStatus testStatus;
+    private final TestStatus testStatus = TestStatus.RECEIPT_TEMPORARY_SAVE;
 
     public Receipt toReceiptEntity() {
         Receipt receipt = new Receipt();
         receipt.setRequestId(this.getRequestId());
         receipt.setReceiptNumber(this.getReceiptNumber());
-        receipt.setTestStatus(TestStatus.RECEIPT_TEMPORARY_SAVE);
+        receipt.setTestStatus(testStatus);
         return receipt;
     }
 

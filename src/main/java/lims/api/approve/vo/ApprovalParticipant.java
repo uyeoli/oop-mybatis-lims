@@ -1,29 +1,29 @@
 package lims.api.approve.vo;
 
 import lims.api.approve.entity.Approver;
-import lims.api.common.enums.UseType;
+import lims.api.approve.enums.ApproverType;
 
 public abstract class ApprovalParticipant {
     private final String name;
-    private final UseType approveYn;
+    private final ApproverType approverType;
 
-    protected ApprovalParticipant(String name, UseType approveYn) {
+    protected ApprovalParticipant(String name, ApproverType approverType) {
         this.name = name;
-        this.approveYn = approveYn;
+        this.approverType = approverType;
     }
 
     public String getName() {
         return name;
     }
 
-    public UseType getApproveYn() {
-        return approveYn;
+    public ApproverType getApproverType() {
+        return approverType;
     }
 
     public Approver toEntity() {
         return Approver.builder()
                 .approverName(this.getName())
-                .approveYn(this.getApproveYn())
+                .approverType(this.getApproverType())
                 .build();
     }
 }

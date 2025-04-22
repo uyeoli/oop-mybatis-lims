@@ -1,10 +1,8 @@
 package lims.api.test.service.impl;
 
 import lims.api.approve.entity.Approval;
-import lims.api.approve.entity.Approver;
 import lims.api.approve.service.ApprovalService;
 import lims.api.approve.vo.ApprovalParticipant;
-import lims.api.approve.vo.DraftedApprover;
 import lims.api.test.dto.request.ResultInputCreateDto;
 import lims.api.test.dto.request.ResultInputModifyDto;
 import lims.api.test.dto.request.ResultInputApproveDto;
