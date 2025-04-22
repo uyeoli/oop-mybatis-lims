@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 public class CurrentApprover extends ApprovalParticipant{
 
     public CurrentApprover(String name) {
