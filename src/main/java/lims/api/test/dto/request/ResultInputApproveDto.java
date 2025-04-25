@@ -10,7 +10,7 @@ import lombok.Setter;
 public class ResultInputApproveDto {
     private DraftedApprover draftedApprover;
 
-    public ApprovalParticipant of() {
+    public DraftedApprover of() {
         return this.draftedApprover;
     }
 

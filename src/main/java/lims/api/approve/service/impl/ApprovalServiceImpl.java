@@ -1,14 +1,14 @@
 package lims.api.approve.service.impl;
 
-import lims.api.approve.dto.request.ApproverInfoDto;
-import lims.api.approve.dto.request.RejectInfoDto;
+import lims.api.approve.dto.request.ApproveRequestDto;
+import lims.api.approve.dto.request.RejectRequestDto;
 import lims.api.approve.entity.Approval;
 import lims.api.approve.entity.Approver;
 import lims.api.approve.enums.ApprovalStatus;
 import lims.api.approve.enums.ApproverType;
 import lims.api.approve.repository.ApprovalRepository;
 import lims.api.approve.service.ApprovalService;
-import lims.api.approve.vo.ApprovalParticipant;
+import lims.api.approve.vo.DraftedApprover;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +22,10 @@ public class ApprovalServiceImpl implements ApprovalService {
     private final ApprovalRepository approvalRepository;
 
     @Override
-    public Approval draft(List<ApprovalParticipant> approvalParticipants) {
+    public Approval draft(List<DraftedApprover> draftedApprovers) {
         Approval approval = new Approval(LocalDate.now(), ApprovalStatus.DRAFT);
         createApprove(approval);
-        saveApprovers(approval.getId(), approvalParticipants);
+        saveApprovers(approval.getId(), draftedApprovers);
         return approval;
     }
 
@@ -33,8 +33,8 @@ public class ApprovalServiceImpl implements ApprovalService {
         approvalRepository.insertApproval(approval);
     }
 
-    private void saveApprovers(Long approveId, List<ApprovalParticipant> approvalParticipants) {
-        List<Approver> approvers = approvalParticipants.stream().map(ApprovalParticipant::toEntity).collect(Collectors.toList());
+    private void saveApprovers(Long approveId, List<DraftedApprover> draftedApprovers) {
+        List<Approver> approvers = draftedApprovers.stream().map(DraftedApprover::toEntity).collect(Collectors.toList());
         approvers.forEach(approver -> {
             approver.setApproveId(approveId);
             approvalRepository.insertApprover(approver);
@@ -43,16 +43,16 @@ public class ApprovalServiceImpl implements ApprovalService {
 
     // 승인 시 승인자의 상태값 변경.
     @Override
-    public void approve(Long approvalId, ApproverInfoDto approverInfoDto) {
-        Approver approver = ApproverInfoDto.of(approverInfoDto);
+    public void approve(Long approvalId, ApproveRequestDto approveRequestDto) {
+        Approver approver = approveRequestDto.toEntity();
         approvalRepository.approve(approver);
 
-        if(isFinish(approvalId)) {
+        if(isLastApprover(approvalId)) {
             finishApproval(approvalId);
         }
     }
 
-    private boolean isFinish(Long approvalId) {
+    private boolean isLastApprover(Long approvalId) {
         List<Approver> approvers = approvalRepository.findApprovers(approvalId);
         return approvers.stream()
                 .allMatch(approver -> approver.getApproverType() == ApproverType.APPROVE);
@@ -65,8 +65,8 @@ public class ApprovalServiceImpl implements ApprovalService {
     }
 
     @Override
-    public void reject(RejectInfoDto rejectInfoDto) {
-        Approver approver = RejectInfoDto.of(rejectInfoDto);
+    public void reject(RejectRequestDto rejectRequestDto) {
+        Approver approver = rejectRequestDto.getCompanion().toEntity();
         approvalRepository.reject(approver);
     }
 

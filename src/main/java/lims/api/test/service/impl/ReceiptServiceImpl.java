@@ -2,9 +2,11 @@ package lims.api.test.service.impl;
 
 import lims.api.approve.entity.Approval;
 import lims.api.approve.service.ApprovalService;
-import lims.api.approve.vo.ApprovalParticipant;
 import lims.api.approve.vo.DraftedApprover;
-import lims.api.test.dto.request.*;
+import lims.api.test.dto.request.ReceiptApproveDto;
+import lims.api.test.dto.request.ReceiptCreateDto;
+import lims.api.test.dto.request.ReceiptModifyDto;
+import lims.api.test.dto.request.TestItemCreateDto;
 import lims.api.test.dto.response.ReceiptDto;
 import lims.api.test.dto.response.TestItemDto;
 import lims.api.test.entity.Receipt;
@@ -76,9 +78,9 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public void draft(Long id, List<ReceiptApproveDto> receiptApprovers) {
-        List<ApprovalParticipant> approvers = receiptApprovers.stream().map(ReceiptApproveDto::of).toList();
-
+        List<DraftedApprover> approvers = receiptApprovers.stream().map(ReceiptApproveDto::of).toList();
         Approval approval = approvalService.draft(approvers);
+
         Receipt receipt = receiptRepository.findById(id);
         receipt.setApproveId(approval.getId());
         receiptRepository.updateApproveKey(receipt);

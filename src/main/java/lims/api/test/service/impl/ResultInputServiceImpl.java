@@ -3,6 +3,7 @@ package lims.api.test.service.impl;
 import lims.api.approve.entity.Approval;
 import lims.api.approve.service.ApprovalService;
 import lims.api.approve.vo.ApprovalParticipant;
+import lims.api.approve.vo.DraftedApprover;
 import lims.api.test.dto.request.ResultInputCreateDto;
 import lims.api.test.dto.request.ResultInputModifyDto;
 import lims.api.test.dto.request.ResultInputApproveDto;
@@ -65,7 +66,7 @@ public class ResultInputServiceImpl implements ResultInputService {
 
     @Override
     public void draft(Long id, List<ResultInputApproveDto> resultInputApprovers) {
-        List<ApprovalParticipant> approvers = resultInputApprovers.stream().map(ResultInputApproveDto::of).toList();
+        List<DraftedApprover> approvers = resultInputApprovers.stream().map(ResultInputApproveDto::of).toList();
         Approval approval = approvalService.draft(approvers);
 
         ResultInput resultInput = resultInputRepository.findById(id);
