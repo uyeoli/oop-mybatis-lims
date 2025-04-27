@@ -18,8 +18,8 @@ public class Receipt {
     private String receiptNumber;
     private Long approveId;
     private LocalDate receiptDate;
-    private List<TestItem> testItems;
     private TestStatus testStatus;
+    private List<TestItem> testItems;
 
 
     public void modify(ReceiptModifyDto receiptModifyDto) {

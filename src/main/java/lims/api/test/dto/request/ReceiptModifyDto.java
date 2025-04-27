@@ -1,6 +1,5 @@
 package lims.api.test.dto.request;
 
-import lims.api.test.entity.TestItem;
 import lombok.Getter;
 import lombok.Setter;
 

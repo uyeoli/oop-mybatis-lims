@@ -4,7 +4,15 @@
 
 
     <insert id="insertApproval" parameterType="Approval" useGeneratedKeys="true" keyProperty="id">
-        insert into approval(request_domain) values (#{requestDomain})
+        insert into approval
+            (
+             approve_date,
+            approval_status
+            )
+            values(
+            #{approveDate},
+            #{approvalStatus}
+            )
     </insert>
 
 
@@ -12,14 +20,21 @@
         insert into approver(
             approve_id,
             approver_name,
-            approve_order,
-            approve_yn
+            approver_type
         )values (
             #{approveId},
             #{approverName},
-            #{approveOrder},
-            #{approveYn}
+            #{approverType}
         )
     </insert>
+
+    <update id="approve" parameterType="Approver">
+        update approver set approver_type = #{approverType} where id = #{id}
+    </update>
+
+    <select id="findApprovers" parameterType="Long" resultType="Approver">
+        select * from approver where approve_id = #{approveId}
+    </select>
+
 
 </mapper>

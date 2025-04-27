@@ -4,10 +4,12 @@
 
     <select id="findAll" resultType="Receipt">
         SELECT
-            id,
-            request_id,
-            receipt_name,
-            receipt_number
+            id
+            , requestId
+            , receiptNumber
+            , approveId
+            , receiptDate
+            , testStatus
         FROM receipt
     </select>
 
@@ -18,21 +20,25 @@
 
     <insert id="insert" parameterType="Receipt" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO receipt(
-            request_id,
-            receipt_name,
-            receipt_number
+            request_id
+            ,receipt_number
+            ,approve_id
+            ,receipt_date
+            ,test_status
         )VALUES(
-            #{requestId},
-            #{receiptName},
-            #{receiptNumber}
+            #{requestId}
+            ,#{receiptNumber}
+            ,#{approveId}
+            ,#{receiptDate}
+            ,#{testStatus}
         )
     </insert>
 
     <insert id="update" parameterType="Request">
         UPDATE receipt SET
-            request_id = #{requestId},
-            receipt_name = #{receiptName},
-            receipt_number = #{receiptNumber}
+            receipt_number = #{receiptNumber},
+            receipt_date = #{receiptDate},
+            test_status = #{testStatus}
         WHERE id = #{id}
     </insert>
 
