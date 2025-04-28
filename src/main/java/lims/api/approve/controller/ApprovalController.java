@@ -18,8 +18,8 @@ public class ApprovalController {
     }
 
     @PutMapping("/{id}/reject")
-    public void reject(@RequestBody RejectRequestDto rejectRequestDto) {
-        approvalService.reject(rejectRequestDto);
+    public void reject(@PathVariable Long id, @RequestBody RejectRequestDto rejectRequestDto) {
+        approvalService.reject(id, rejectRequestDto);
     }
 
 

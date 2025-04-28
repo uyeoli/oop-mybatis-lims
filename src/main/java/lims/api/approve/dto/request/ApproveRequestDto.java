@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 public class ApproveRequestDto {
     private Long approverId;
-//    private CurrentApprover currentApprover;
 
     public Approver toEntity() {
         Approver approver = new Approver();

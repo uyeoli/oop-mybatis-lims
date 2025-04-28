@@ -14,7 +14,7 @@ public interface ApprovalService {
 
     void approve(Long id, ApproveRequestDto approveRequestDto);
 
-    void reject(RejectRequestDto rejectRequestDto);
+    void reject(Long id, RejectRequestDto rejectRequestDto);
 
 
 

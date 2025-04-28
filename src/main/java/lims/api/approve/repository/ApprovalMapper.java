@@ -7,12 +7,14 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface ApprovalRepository {
+public interface ApprovalMapper {
+
     void insert(Approval approval);
 
-    List<Approver> findApprovers(Long approveId);
+    void save(Approval approval);
+
+    List<Approver> findApprovers(Long id);
 
     Approval findById(Long id);
 
-    void save(Approval approval);
 }
