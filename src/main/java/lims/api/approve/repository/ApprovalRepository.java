@@ -1,6 +1,5 @@
 package lims.api.approve.repository;
 
-import lims.api.approve.dto.request.ApprovalRequestDto;
 import lims.api.approve.entity.Approval;
 import lims.api.approve.entity.Approver;
 import lombok.RequiredArgsConstructor;
