@@ -1,7 +1,7 @@
 package lims.api.approve.dto.request;
 
 import lims.api.approve.entity.Approver;
-import lims.api.approve.enums.ApproverType;
+import lims.api.approve.enums.ApproveYn;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +13,7 @@ public class ApprovalRequestDto{
     public Approver toEntity() {
         Approver approver = new Approver();
         approver.setId(this.approverId);
-        approver.setApproverType(ApproverType.DRAFTED);
+        approver.setApproveYn(ApproveYn.Y);
         return approver;
     }
 

@@ -1,7 +1,6 @@
 package lims.api.approve.entity;
 
 import lims.api.approve.dto.request.ApprovalRequestDto;
-import lims.api.approve.dto.request.RejectRequestDto;
 import lims.api.approve.enums.ApprovalStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,9 +28,7 @@ public class Approval{
         this.approvalStatus = ApprovalStatus.APPROVE_COMPLETE;
     }
 
-    public void reject(RejectRequestDto rejectRequestDto) {
-        Approver companion = rejectRequestDto.toEntity();
-
+    public void reject() {
         this.approvalStatus = ApprovalStatus.REJECT;
     }
 
@@ -50,9 +47,6 @@ public class Approval{
         return currentApprover.orElseThrow(() -> new NoSuchElementException("Approver not found"));
     }
 
-    public Approver getCompanion(RejectRequestDto rejectRequestDto) {
-        Approver companion =
-    }
 
 
 }

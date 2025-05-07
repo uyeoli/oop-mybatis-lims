@@ -1,13 +1,13 @@
 package lims.api.approve.vo;
 
 import lims.api.approve.entity.Approver;
-import lims.api.approve.enums.ApproverType;
+import lims.api.approve.enums.ApproveYn;
 import lombok.Getter;
 
 @Getter
 public class DraftedApprover {
     private String approverName;
-    private final ApproverType approverType = ApproverType.DRAFTED;
+    private final ApproveYn approveYn = ApproveYn.N;
 
     public DraftedApprover(String approverName) {
         this.approverName = approverName;
@@ -16,7 +16,7 @@ public class DraftedApprover {
     public Approver toEntity() {
         Approver approver = new Approver();
         approver.setApproverName(this.approverName);
-        approver.setApproverType(this.approverType);
+        approver.setApproveYn(this.approveYn);
         return approver;
     }
 

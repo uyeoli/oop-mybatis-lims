@@ -1,6 +1,6 @@
 package lims.api.approve.entity;
 
-import lims.api.approve.enums.ApproverType;
+import lims.api.approve.enums.ApproveYn;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,18 +12,14 @@ public class Approver {
     private Long id;
     private Long approveId;
     private String approverName;
-    private ApproverType approverType;
+    private ApproveYn approveYn;
 
     public void approve() {
-        this.approverType = ApproverType.APPROVE;
-    }
-
-    public void reject() {
-        this.approverType = ApproverType.REJECT;
+        this.approveYn = ApproveYn.Y;
     }
 
     public boolean isApproved() {
-        return this.approverType == ApproverType.APPROVE;
+        return this.approveYn == ApproveYn.Y;
     }
 
 }

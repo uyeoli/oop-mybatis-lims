@@ -1,7 +1,6 @@
 package lims.api.approve.service.impl;
 
 import lims.api.approve.dto.request.ApprovalRequestDto;
-import lims.api.approve.dto.request.RejectRequestDto;
 import lims.api.approve.entity.Approval;
 import lims.api.approve.entity.Approver;
 import lims.api.approve.repository.ApprovalRepository;
@@ -35,9 +34,9 @@ public class ApprovalServiceImpl implements ApprovalService {
 
 
     @Override
-    public void reject(Long approvalId, RejectRequestDto rejectRequestDto) {
+    public void reject(Long approvalId) {
         Approval approval = approvalRepository.findById(approvalId);
-        approvalRepository.reject(approval, rejectRequestDto);
+        approvalRepository.reject(approval);
     }
 
 }

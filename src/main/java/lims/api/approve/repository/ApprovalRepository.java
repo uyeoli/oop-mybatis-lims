@@ -1,7 +1,6 @@
 package lims.api.approve.repository;
 
 import lims.api.approve.dto.request.ApprovalRequestDto;
-import lims.api.approve.dto.request.RejectRequestDto;
 import lims.api.approve.entity.Approval;
 import lims.api.approve.entity.Approver;
 import lombok.RequiredArgsConstructor;
@@ -44,9 +43,8 @@ public class ApprovalRepository {
         }
     }
 
-    //1. 승인자가 반려 시 -> 승인이 반려상태로 변경
-    public void reject(Approval approval, RejectRequestDto rejectRequestDto) {
-        approval.reject(rejectRequestDto);
-        approverMapper.save(approver);
+    public void reject(Approval approval) {
+        approval.reject();
+        approvalMapper.save(approval);
     }
 }

@@ -1,7 +1,6 @@
 package lims.api.approve.controller;
 
 import lims.api.approve.dto.request.ApprovalRequestDto;
-import lims.api.approve.dto.request.RejectRequestDto;
 import lims.api.approve.service.ApprovalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +17,8 @@ public class ApprovalController {
     }
 
     @PutMapping("/{id}/reject")
-    public void reject(@PathVariable Long id, @RequestBody RejectRequestDto rejectRequestDto) {
-        approvalService.reject(id, rejectRequestDto);
+    public void reject(@PathVariable Long id) {
+        approvalService.reject(id);
     }
 
 

@@ -2,11 +2,10 @@ package lims.api.approve.enums;
 
 import lims.api.config.mybatis.typehandler.EnumeratedValueType;
 
-public enum ApproverType implements EnumeratedValueType {
+public enum ApproveYn implements EnumeratedValueType {
 
-    DRAFTED,
-    APPROVE,
-    REJECT;
+    Y,
+    N;
 
     @Override
     public String value() {
