@@ -1,6 +1,6 @@
 package lims.api.approve.controller;
 
-import lims.api.approve.dto.request.ApproveRequestDto;
+import lims.api.approve.dto.request.ApprovalRequestDto;
 import lims.api.approve.dto.request.RejectRequestDto;
 import lims.api.approve.service.ApprovalService;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +13,8 @@ public class ApprovalController {
     private final ApprovalService approvalService;
 
     @PutMapping("/{id}/approve")
-    public void approve(@PathVariable Long id, @RequestBody ApproveRequestDto approveRequestDto) {
-        approvalService.approve(id, approveRequestDto);
+    public void approve(@PathVariable Long id, @RequestBody ApprovalRequestDto approvalRequestDto) {
+        approvalService.approve(id, approvalRequestDto);
     }
 
     @PutMapping("/{id}/reject")

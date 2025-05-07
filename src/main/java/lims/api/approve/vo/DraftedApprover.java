@@ -5,7 +5,7 @@ import lims.api.approve.enums.ApproverType;
 import lombok.Getter;
 
 @Getter
-public class DraftedApprover{
+public class DraftedApprover {
     private String approverName;
     private final ApproverType approverType = ApproverType.DRAFTED;
 

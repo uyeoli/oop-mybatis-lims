@@ -1,11 +1,13 @@
 package lims.api.approve.entity;
 
 import lims.api.approve.enums.ApproverType;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 public class Approver {
     private Long id;
     private Long approveId;

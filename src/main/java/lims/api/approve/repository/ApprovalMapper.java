@@ -8,13 +8,11 @@ import java.util.List;
 
 @Mapper
 public interface ApprovalMapper {
-
     void insert(Approval approval);
 
-    void save(Approval approval);
-
-    List<Approver> findApprovers(Long id);
+    List<Approver> findApprovers(Long approveId);
 
     Approval findById(Long id);
 
+    void save(Approval approval);
 }

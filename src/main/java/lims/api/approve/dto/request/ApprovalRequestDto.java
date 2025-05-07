@@ -7,13 +7,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ApproveRequestDto {
-    private Long approverId;
+public class ApprovalRequestDto{
 
+    private Long approverId;
     public Approver toEntity() {
         Approver approver = new Approver();
         approver.setId(this.approverId);
-        approver.setApproverType(ApproverType.APPROVE);
+        approver.setApproverType(ApproverType.DRAFTED);
         return approver;
     }
 
