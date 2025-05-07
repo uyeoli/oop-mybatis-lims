@@ -7,10 +7,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Approver {
+
+    @EqualsAndHashCode.Include
     private Long id;
-    private Long approveId;
+    private Long approvalId;
     private String approverName;
     private ApproveYn approveYn;
 

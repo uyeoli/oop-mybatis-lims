@@ -37,9 +37,7 @@ public class Approval{
                 .allMatch(approver -> approver.isApproved());
     }
 
-    public Approver getCurrentApprover(ApprovalRequestDto approvalRequestDto) {
-        Approver requestApprover = approvalRequestDto.toEntity();
-
+    public Approver getCurrentApprover(Approver requestApprover) {
         Optional<Approver> currentApprover = this.approvers.stream()
                 .filter(approver -> approver.equals(requestApprover))
                 .findAny();

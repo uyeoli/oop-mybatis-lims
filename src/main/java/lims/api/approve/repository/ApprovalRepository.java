@@ -19,7 +19,7 @@ public class ApprovalRepository {
         approvalMapper.insert(approval);
 
         for(Approver approver : approval.getApprovers()) {
-            approver.setApproveId(approval.getId());
+            approver.setApprovalId(approval.getId());
             approverMapper.insert(approver);
         }
 
@@ -32,10 +32,10 @@ public class ApprovalRepository {
         return approval;
     }
 
-    public void approve(Approval approval, ApprovalRequestDto approvalRequestDto) {
-        Approver approver = approval.getCurrentApprover(approvalRequestDto);
-        approver.approve();
-        approverMapper.save(approver);
+    public void approve(Approval approval, Approver approver) {
+        Approver currentApprover = approval.getCurrentApprover(approver);
+        currentApprover.approve();
+        approverMapper.save(currentApprover);
 
         if(approval.isAllApproved()) {
             approval.complete();

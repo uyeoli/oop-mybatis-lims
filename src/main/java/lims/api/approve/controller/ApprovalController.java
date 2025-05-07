@@ -21,9 +21,4 @@ public class ApprovalController {
         approvalService.reject(id);
     }
 
-
-
-
-
-
 }

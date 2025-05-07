@@ -10,10 +10,12 @@ import lombok.Setter;
 public class ApprovalRequestDto{
 
     private Long approverId;
+    private String approverName;
     public Approver toEntity() {
         Approver approver = new Approver();
         approver.setId(this.approverId);
-        approver.setApproveYn(ApproveYn.Y);
+        approver.setApproverName(this.approverName);
+        approver.setApproveYn(ApproveYn.N);
         return approver;
     }
 

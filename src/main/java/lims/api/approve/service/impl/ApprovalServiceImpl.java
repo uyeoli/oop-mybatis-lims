@@ -29,7 +29,8 @@ public class ApprovalServiceImpl implements ApprovalService {
     @Override
     public void approve(Long approvalId, ApprovalRequestDto approvalRequestDto) {
         Approval approval = approvalRepository.findById(approvalId);
-        approvalRepository.approve(approval, approvalRequestDto);
+        Approver approver = approvalRequestDto.toEntity();
+        approvalRepository.approve(approval, approver);
     }
 
 
