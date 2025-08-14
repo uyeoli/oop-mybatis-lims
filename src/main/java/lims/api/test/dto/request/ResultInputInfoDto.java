@@ -11,5 +11,6 @@ public class ResultInputInfoDto {
 
     private Long id;
     private Long receiptId;
+    private String testJudgement;
     private List<TestItemResultDto> testItemResultDto;
 }

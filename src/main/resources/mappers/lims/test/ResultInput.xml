@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lims.api.test.repository.ResultInputRepository">
+
+    <select id="findAll" resultType="ResultInput">
+        SELECT
+            id,
+            receipt_Id,
+            test_Judgement,
+            approve_Id
+        FROM result_input
+    </select>
+
+    <select id="findById" parameterType="Long" resultType="ResultInput">
+        select * from result_input where id = #{id}
+    </select>
+
+
+    <insert id="insert" parameterType="Receipt" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO result_input(
+            receipt_Id,
+            test_Judgement,
+            approve_Id,
+        )VALUES(
+            #{receiptId},
+            #{testJudgement},
+            #{approveId}
+        )
+    </insert>
+
+    <insert id="update" parameterType="ResultInput">
+        UPDATE result_input SET
+            test_judgement = #{testJudgement}
+        WHERE id = #{id}
+    </insert>
+
+    <delete id="deleteById" parameterType="Long">
+        DELETE FROM result_input WHERE id = #{id}
+    </delete>
+
+    <update id="updateApproveKey" parameterType="Receipt">
+        update result_input set approve_id = #{approveId} where id = #{id}
+    </update>
+
+
+</mapper>

@@ -1,6 +1,7 @@
 package lims.api.test.controller;
 
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lims.api.test.dto.request.RequestCreateDto;
 import lims.api.test.dto.request.RequestModifyDto;
 import lims.api.test.dto.response.RequestDto;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "request controller api", description = "의뢰 API")
 @RestController
 @RequestMapping("/requests")
 @RequiredArgsConstructor

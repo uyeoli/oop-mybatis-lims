@@ -11,6 +11,16 @@
         FROM REQUEST
     </select>
 
+    <select id="findById" resultType="Request" parameterType="Long">
+        SELECT
+            id,
+            test_title,
+            sample_name,
+            sample_quantity
+        FROM REQUEST
+        WHERE id=#{id}
+    </select>
+
 
     <insert id="insert" parameterType="Request" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO REQUEST(

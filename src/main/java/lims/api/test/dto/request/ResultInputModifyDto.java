@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 public class ResultInputModifyDto {
     private Long id;
+    private String testJudgement;
     private List<TestItemResultModifyDto> testItemResults = new ArrayList<>();
 
     public ResultInput toResultInputEntity(ResultInputModifyDto resultInputModifyDto) {

@@ -5,15 +5,15 @@
     <select id="findAll" resultType="Receipt">
         SELECT
             id
-            , requestId
-            , receiptNumber
-            , approveId
-            , receiptDate
-            , testStatus
+            , request_id
+            , receipt_number
+            , approve_id
+            , receipt_date
+            , test_status
         FROM receipt
     </select>
 
-    <select id="findById" parameterType="Long">
+    <select id="findById" parameterType="Long" resultType="Receipt">
         select * from receipt where id = #{id}
     </select>
 

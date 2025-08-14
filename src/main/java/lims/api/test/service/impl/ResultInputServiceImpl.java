@@ -25,8 +25,7 @@ public class ResultInputServiceImpl implements ResultInputService {
     private final ApprovalService approvalService;
     @Override
     public List<ResultInputDto> findAll() {
-//        List<ResultInputDto> resultInputList = resultInputRepository.findAll().stream().map(ResultInputDto::of).toList();
-        return null;
+        return resultInputRepository.findAll().stream().map(ResultInputDto::of).toList();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package lims.api.test.controller;
 
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lims.api.test.dto.request.ReceiptModifyDto;
 import lims.api.test.dto.request.ReceiptApproveDto;
 import lims.api.test.dto.request.ReceiptCreateDto;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "receipt controller api", description = "접수 API")
 @RestController
 @RequestMapping("/receipts")
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class ReceiptController {
         receiptService.insert(receiptCreateDto);
     }
 
-    @PostMapping
+    @PutMapping
     public void modify(Long id, @RequestBody ReceiptModifyDto receiptModifyDto) {
         receiptService.update(id, receiptModifyDto);
     }

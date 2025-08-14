@@ -38,7 +38,7 @@ public class RequestServiceImpl implements RequestService {
     public void submitRequest(Long id) {
         Request request = requestRepository.findById(id);
         request.submit();
-        requestRepository.save(request);
+        requestRepository.update(request);
     }
 
     @Override
