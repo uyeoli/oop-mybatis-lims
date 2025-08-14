@@ -5,6 +5,8 @@ import lims.api.test.entity.TestItem;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -12,15 +14,14 @@ import java.util.List;
 public class ReceiptDto {
 
     private Long id;
-    private String receiptName;
     private String receiptNumber;
-    private List<TestItem> testItems;
+    private LocalDate receiptDate;
+    private List<TestItemDto> testItems = new ArrayList<>();
 
     public static ReceiptDto of(Receipt receipt) {
         ReceiptDto receiptDto = new ReceiptDto();
         receiptDto.setId(receipt.getId());
         receiptDto.setReceiptNumber(receipt.getReceiptNumber());
-        receiptDto.setReceiptName(receipt.getReceiptName());
         return receiptDto;
     }
 

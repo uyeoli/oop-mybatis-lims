@@ -1,6 +1,7 @@
 package lims.api.test.service.impl;
 
-import lims.api.test.dto.request.RequestInfoDto;
+import lims.api.test.dto.request.RequestCreateDto;
+import lims.api.test.dto.request.RequestModifyDto;
 import lims.api.test.dto.response.RequestDto;
 import lims.api.test.entity.Request;
 import lims.api.test.repository.RequestRepository;
@@ -20,15 +21,24 @@ public class RequestServiceImpl implements RequestService {
         return requestRepository.findAll().stream().map(RequestDto::of).toList();
     }
 
+    @Override
+    public void insert(RequestCreateDto requestCreateDto) {
+        Request request = requestCreateDto.toEntity();
+        requestRepository.insert(request);
+    }
 
     @Override
-    public void request(RequestInfoDto requestInfoDto) {
-        Request request = requestInfoDto.toEntity(requestInfoDto);
-        if(request.isNew()) {
-            requestRepository.insert(request);
-        } else {
-            requestRepository.update(request);
-        }
+    public void update(Long id, RequestModifyDto requestModifyDto) {
+        Request request = requestRepository.findById(id);
+        request.modify(requestModifyDto);
+        requestRepository.update(request);
+    }
+
+    @Override
+    public void submitRequest(Long id) {
+        Request request = requestRepository.findById(id);
+        request.submit();
+        requestRepository.save(request);
     }
 
     @Override

@@ -1,7 +1,8 @@
 package lims.api.test.controller;
 
 
-import lims.api.test.dto.request.RequestInfoDto;
+import lims.api.test.dto.request.RequestCreateDto;
+import lims.api.test.dto.request.RequestModifyDto;
 import lims.api.test.dto.response.RequestDto;
 import lims.api.test.service.RequestService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/test/requests")
+@RequestMapping("/requests")
 @RequiredArgsConstructor
 public class RequestController {
 
@@ -23,9 +24,19 @@ public class RequestController {
         return ResponseEntity.ok(requestService.findAll());
     }
 
-    @PostMapping
-    public void request(@RequestBody RequestInfoDto requestInfoDto) {
-        requestService.request(requestInfoDto);
+    @PostMapping()
+    public void create(@RequestBody RequestCreateDto requestCreateDto) {
+        requestService.insert(requestCreateDto);
+    }
+
+    @PutMapping("/{id}/submit")
+    public void submit(@PathVariable Long id) {
+        requestService.submitRequest(id);
+    }
+
+    @PutMapping("/{id}")
+    public void modify(@PathVariable Long id, @RequestBody RequestModifyDto requestModifyDto) {
+        requestService.update(id, requestModifyDto);
     }
 
     @DeleteMapping("/{id}")

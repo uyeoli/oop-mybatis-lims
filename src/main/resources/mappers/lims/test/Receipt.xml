@@ -4,37 +4,51 @@
 
     <select id="findAll" resultType="Receipt">
         SELECT
-            id,
-            requestId,
-            receiptName,
-            receiptNumber
+            id
+            , requestId
+            , receiptNumber
+            , approveId
+            , receiptDate
+            , testStatus
         FROM receipt
+    </select>
+
+    <select id="findById" parameterType="Long">
+        select * from receipt where id = #{id}
     </select>
 
 
     <insert id="insert" parameterType="Receipt" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO receipt(
-            requestId,
-            receiptName,
-            receiptNumber
+            request_id
+            ,receipt_number
+            ,approve_id
+            ,receipt_date
+            ,test_status
         )VALUES(
-            #{requestId},
-            #{receiptName},
-            #{receiptNumber}
+            #{requestId}
+            ,#{receiptNumber}
+            ,#{approveId}
+            ,#{receiptDate}
+            ,#{testStatus}
         )
     </insert>
 
     <insert id="update" parameterType="Request">
         UPDATE receipt SET
-            requestId = #{requestId},
-            receiptName = #{receiptName},
-            receiptNumber = #{receiptNumber}
+            receipt_number = #{receiptNumber},
+            receipt_date = #{receiptDate},
+            test_status = #{testStatus}
         WHERE id = #{id}
     </insert>
 
     <delete id="deleteById" parameterType="Long">
         DELETE FROM receipt WHERE id = #{id}
     </delete>
+
+    <update id="updateApproveKey" parameterType="Receipt">
+        update receipt set approve_id = #{approveId} where id = #{id}
+    </update>
 
 
 </mapper>

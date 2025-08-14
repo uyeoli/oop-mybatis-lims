@@ -1,0 +1,50 @@
+package lims.api.approve.entity;
+
+import lims.api.approve.dto.request.ApprovalRequestDto;
+import lims.api.approve.enums.ApprovalStatus;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
+@Getter
+@Setter
+public class Approval{
+    private Long id;
+    private LocalDate approveRequestDate;
+    private ApprovalStatus approvalStatus;
+    private List<Approver> approvers;
+
+    public Approval(List<Approver> approvers) {
+        this.approvers = approvers;
+        this.approveRequestDate = LocalDate.now();
+        this.approvalStatus = ApprovalStatus.DRAFT;
+    }
+
+    public void complete() {
+        this.approvalStatus = ApprovalStatus.APPROVE_COMPLETE;
+    }
+
+    public void reject() {
+        this.approvalStatus = ApprovalStatus.REJECT;
+    }
+
+    public boolean isAllApproved() {
+        return this.approvers.stream()
+                .allMatch(approver -> approver.isApproved());
+    }
+
+    public Approver getCurrentApprover(Approver requestApprover) {
+        Optional<Approver> currentApprover = this.approvers.stream()
+                .filter(approver -> approver.equals(requestApprover))
+                .findAny();
+
+        return currentApprover.orElseThrow(() -> new NoSuchElementException("Approver not found"));
+    }
+
+
+
+}

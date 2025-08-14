@@ -21,6 +21,10 @@
         )
     </insert>
 
+    <update id="update" parameterType="TestItem">
+        update test_item set item_name= #{itemName} where id = #{id}
+    </update>
+
     <delete id="deleteById" parameterType="Long">
         DELETE FROM test_item where id = #{id}
     </delete>

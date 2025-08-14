@@ -1,7 +1,9 @@
 package lims.api.test.controller;
 
 
-import lims.api.test.dto.request.ReceiptInfoDto;
+import lims.api.test.dto.request.ReceiptModifyDto;
+import lims.api.test.dto.request.ReceiptApproveDto;
+import lims.api.test.dto.request.ReceiptCreateDto;
 import lims.api.test.dto.response.ReceiptDto;
 import lims.api.test.service.ReceiptService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/test/receipts")
+@RequestMapping("/receipts")
 @RequiredArgsConstructor
 public class ReceiptController {
     private final ReceiptService receiptService;
@@ -21,13 +23,23 @@ public class ReceiptController {
     }
 
     @PostMapping
-    public void receipt(ReceiptInfoDto receiptInfoDto) {
-        receiptService.receipt(receiptInfoDto);
+    public void create(@RequestBody ReceiptCreateDto receiptCreateDto) {
+        receiptService.insert(receiptCreateDto);
+    }
+
+    @PostMapping
+    public void modify(Long id, @RequestBody ReceiptModifyDto receiptModifyDto) {
+        receiptService.update(id, receiptModifyDto);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         receiptService.delete(id);
+    }
+
+    @PutMapping("/{id}/approval")
+    public void draft(@PathVariable Long id, @RequestBody List<ReceiptApproveDto> receiptApproveDto) {
+        receiptService.draft(id, receiptApproveDto);
     }
 
 

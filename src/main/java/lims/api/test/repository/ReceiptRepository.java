@@ -6,4 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ReceiptRepository extends DataAccessRepository<Receipt, Long> {
 
+    void updateApproveKey(Receipt receipt);
+
 }
