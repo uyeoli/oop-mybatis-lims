@@ -7,11 +7,11 @@ import lombok.Setter;
 @Setter
 public class TestItemResult {
 
-    Long id;
+    private Long id;
 
-    Long resultInputId;
+    private Long resultInputId;
 
-    String testerName;
+    private String testerName;
 
-    String result;
+    private String result;
 }

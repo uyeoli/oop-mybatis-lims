@@ -29,8 +29,8 @@ public class ReceiptController {
         receiptService.insert(receiptCreateDto);
     }
 
-    @PutMapping
-    public void modify(Long id, @RequestBody ReceiptModifyDto receiptModifyDto) {
+    @PutMapping("/{id}")
+    public void modify(@PathVariable Long id, @RequestBody ReceiptModifyDto receiptModifyDto) {
         receiptService.update(id, receiptModifyDto);
     }
 

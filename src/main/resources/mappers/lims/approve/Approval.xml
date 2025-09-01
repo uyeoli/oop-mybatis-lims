@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lims.api.approve.repository.ApprovalMapper">
 
-
-    <insert id="insertApproval" parameterType="Approval" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="Approval" useGeneratedKeys="true" keyProperty="id">
         insert into approval
             (
              approve_date,
@@ -15,26 +14,6 @@
             )
     </insert>
 
-
-    <insert id="insertApprover" parameterType="Approver">
-        insert into approver(
-            approve_id,
-            approver_name,
-            approver_type
-        )values (
-            #{approveId},
-            #{approverName},
-            #{approverType}
-        )
-    </insert>
-
-    <update id="approve" parameterType="Approver">
-        update approver set approver_type = #{approverType} where id = #{id}
-    </update>
-
-    <select id="findApprovers" parameterType="Long" resultType="Approver">
-        select * from approver where approve_id = #{approveId}
-    </select>
 
 
 </mapper>

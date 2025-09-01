@@ -7,7 +7,9 @@
             id,
             test_title,
             sample_name,
-            sample_quantity
+            sample_quantity,
+            test_status,
+            request_date
         FROM REQUEST
     </select>
 
@@ -16,7 +18,9 @@
             id,
             test_title,
             sample_name,
-            sample_quantity
+            sample_quantity,
+            test_status,
+            request_date
         FROM REQUEST
         WHERE id=#{id}
     </select>
@@ -26,11 +30,15 @@
         INSERT INTO REQUEST(
             test_title,
             sample_name,
-            sample_quantity
+            sample_quantity,
+            request_date,
+            test_status
         )VALUES(
             #{testTitle},
             #{sampleName},
-            #{sampleQuantity}
+            #{sampleQuantity},
+            sysdate(),
+            #{testStatus}
         )
     </insert>
 
@@ -38,7 +46,9 @@
         UPDATE REQUEST SET
             test_title = #{testTitle},
             sample_name = #{sampleName},
-            sample_quantity = #{sampleQuantity}
+            sample_quantity = #{sampleQuantity},
+            request_date = sysdate(),
+            test_status = #{testStatus}
         WHERE id = #{id}
     </insert>
 

@@ -29,7 +29,7 @@
             #{requestId}
             ,#{receiptNumber}
             ,#{approveId}
-            ,#{receiptDate}
+            ,sysdate()
             ,#{testStatus}
         )
     </insert>
@@ -37,7 +37,7 @@
     <insert id="update" parameterType="Request">
         UPDATE receipt SET
             receipt_number = #{receiptNumber},
-            receipt_date = #{receiptDate},
+            receipt_date = sysdate(),
             test_status = #{testStatus}
         WHERE id = #{id}
     </insert>
