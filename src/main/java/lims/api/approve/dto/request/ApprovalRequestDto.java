@@ -11,6 +11,7 @@ public class ApprovalRequestDto{
 
     private Long approverId;
     private String approverName;
+
     public Approver toEntity() {
         Approver approver = new Approver();
         approver.setId(this.approverId);

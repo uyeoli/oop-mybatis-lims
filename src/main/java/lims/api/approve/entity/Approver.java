@@ -24,4 +24,8 @@ public class Approver {
         return this.approveYn == ApproveYn.Y;
     }
 
+    @Override
+    public String toString() {
+        return "approver name = " + this.approverName;
+    }
 }

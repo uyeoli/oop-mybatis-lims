@@ -31,12 +31,28 @@ public class ApprovalRepository {
         return approval;
     }
 
-    public void approve(Approval approval, Approver approver) {
-        Approver currentApprover = approval.getCurrentApprover(approver);
-        currentApprover.approve();
-        approverMapper.save(currentApprover);
+    public void approve(Long approvalId, Approver approver) {
+        approver.approve();
+        approverMapper.save(approver); //현재 승인자 키값으로 승인 완료처리
 
+        Approval approval = findById(approvalId); // --동시성 이슈 발생 가능성 있는 코드
         if(approval.isAllApproved()) {
+            approval.complete();
+            approvalMapper.save(approval);
+        }
+    }
+
+    public void approve(Long approvalId, Approver approver, Runnable runnable) {
+        approver.approve();
+        approverMapper.save(approver); //현재 승인자 키값으로 승인 완료처리
+
+        Approval approval = findById(approvalId); // --동시성 이슈 발생 가능성 있는 코드
+        // isAllApproved 체크 시점에 콜백 호출
+        if (runnable != null) {
+            runnable.run();
+        }
+
+        if (approval.isAllApproved()) {
             approval.complete();
             approvalMapper.save(approval);
         }

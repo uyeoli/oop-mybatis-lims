@@ -36,8 +36,9 @@ mybatis :
 logging:
   level:
     com.zaxxer.hikari.HikariConfig: debug
-    com.zaxxer.hikari: trace
+    com.zaxxer.hikari: warn
     root: info
+    org.mybatis: WARN            # MyBatis
     lims.api: debug
     jdbc.resultsettable: info
     jdbc.sqltiming: debug

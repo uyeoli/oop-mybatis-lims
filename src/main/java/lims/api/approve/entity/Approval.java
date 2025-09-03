@@ -1,8 +1,8 @@
 package lims.api.approve.entity;
 
-import lims.api.approve.dto.request.ApprovalRequestDto;
 import lims.api.approve.enums.ApprovalStatus;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@NoArgsConstructor
 @Getter
 @Setter
 public class Approval{
@@ -18,11 +19,12 @@ public class Approval{
     private ApprovalStatus approvalStatus;
     private List<Approver> approvers;
 
+
     public Approval(List<Approver> approvers) {
-        this.approvers = approvers;
-        this.approveRequestDate = LocalDate.now();
-        this.approvalStatus = ApprovalStatus.DRAFT;
-    }
+            this.approvers = approvers;
+            this.approveRequestDate = LocalDate.now();
+            this.approvalStatus = ApprovalStatus.DRAFT;
+        }
 
     public void complete() {
         this.approvalStatus = ApprovalStatus.APPROVE_COMPLETE;

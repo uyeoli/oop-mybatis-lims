@@ -5,14 +5,30 @@
     <insert id="insert" parameterType="Approval" useGeneratedKeys="true" keyProperty="id">
         insert into approval
             (
-             approve_date,
+             approve_request_date,
             approval_status
             )
             values(
-            #{approveDate},
+            #{approveRequestDate},
             #{approvalStatus}
             )
     </insert>
+
+    <select id="findById" parameterType="Long" resultType="Approval">
+        select
+            id,
+            approve_request_date,
+            approval_status
+        from approval
+        where id = #{id}
+    </select>
+
+    <update id="save" parameterType="Approval">
+        update approval
+        set
+            approval_status = #{approvalStatus}
+        where id = #{id}
+    </update>
 
 
 

@@ -18,13 +18,20 @@
 
     <select id="findByApprovalId" parameterType="Long" resultType="Approver">
         SELECT
-            id
-            approval_id
-            approver_name
+            id,
+            approval_id,
+            approver_name,
             approve_yn
         FROM approver
         WHERE APPROVAL_ID = #{approvalId}
     </select>
+
+    <update id="save" parameterType="Approver">
+        UPDATE APPROVER
+        SET
+            approve_yn = #{approveYn}
+        WHERE id = #{id}
+    </update>
 
 
 

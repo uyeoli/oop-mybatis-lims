@@ -28,9 +28,14 @@ public class ApprovalServiceImpl implements ApprovalService {
 
     @Override
     public void approve(Long approvalId, ApprovalRequestDto approvalRequestDto) {
-        Approval approval = approvalRepository.findById(approvalId);
-        Approver approver = approvalRequestDto.toEntity();
-        approvalRepository.approve(approval, approver);
+//        Approval approval = approvalRepository.findById(approvalId); //승인자들 전체 조회
+        Approver approver = approvalRequestDto.toEntity(); //현재 요청한 승인자
+        approvalRepository.approve(approvalId, approver, new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
     }
 
 
