@@ -14,7 +14,7 @@ public class ApprovalController {
     private final ApprovalService approvalService;
 
     @PutMapping("/{id}/approve")
-    public void approve(@PathVariable Long id, @RequestBody ApprovalRequestDto approvalRequestDto) {
+    public void approve(@PathVariable Long id, @RequestBody ApprovalRequestDto approvalRequestDto){
         approvalService.approve(id, approvalRequestDto);
     }
 

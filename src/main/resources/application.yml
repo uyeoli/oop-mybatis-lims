@@ -40,13 +40,13 @@ logging:
     root: info
     org.mybatis: WARN            # MyBatis
     lims.api: debug
-    jdbc.resultsettable: info
-    jdbc.sqltiming: debug
+    jdbc.resultsettable: off
+    jdbc.sqltiming: off
     jdbc: off
     jdbc.audit: off
     jdbc.sqlonly: off
     jdbc.resultset: off
-    jdbc.connection: info
+    jdbc.connection: off
   file :
     path : C:\dev\mybatis-log
     logback :

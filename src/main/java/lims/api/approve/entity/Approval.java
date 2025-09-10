@@ -4,6 +4,7 @@ import lims.api.approve.enums.ApprovalStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @NoArgsConstructor
 @Getter
 @Setter
+@Slf4j
 public class Approval{
     private Long id;
     private LocalDate approveRequestDate;
@@ -34,8 +36,9 @@ public class Approval{
         this.approvalStatus = ApprovalStatus.REJECT;
     }
 
-    public boolean isAllApproved() {
+    public boolean isAllApproved(Approver currentApprover) {
         return this.approvers.stream()
+                .filter(approver -> !approver.getId().equals(currentApprover.getId()))
                 .allMatch(approver -> approver.isApproved());
     }
 
