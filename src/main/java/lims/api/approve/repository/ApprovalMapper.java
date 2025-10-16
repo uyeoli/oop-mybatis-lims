@@ -9,5 +9,7 @@ public interface ApprovalMapper {
 
     Approval findById(Long id);
 
+    Approval findByIdWithLock(Long id);
+
     void save(Approval approval);
 }

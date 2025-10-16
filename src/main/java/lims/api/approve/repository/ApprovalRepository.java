@@ -39,8 +39,12 @@ public class ApprovalRepository {
         try {
             approver.approve();
             log.info("approve log = {}", atomicInteger.incrementAndGet() + "번승인자 : " + approver.getApproverName());
-            approverMapper.save(approver); //현재 승인자 키값으로 승인 완료처리
-            Approval approval = findById(approvalId);
+            approverMapper.save(approver);
+
+            Approval approval = approvalMapper.findByIdWithLock(approvalId);
+            List<Approver> approvers = approverMapper.findByApprovalId(approvalId);
+            approval.setApprovers(approvers);
+
             Thread.sleep(2000);
             boolean isAllApproved = approval.isAllApproved(approver);
             log.info("allApproved log = {}", isAllApproved);

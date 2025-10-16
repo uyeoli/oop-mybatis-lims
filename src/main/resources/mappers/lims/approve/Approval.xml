@@ -23,6 +23,16 @@
         where id = #{id}
     </select>
 
+    <select id="findByIdWithLock" parameterType="Long" resultType="Approval">
+        select
+            id,
+            approve_request_date,
+            approval_status
+        from approval
+        where id = #{id}
+        for update
+    </select>
+
     <update id="save" parameterType="Approval">
         update approval
         set
